@@ -43,7 +43,7 @@ if __name__ == '__main__':
             keywords=['function', 'timeout', 'call', 'terminate', 'runtime', 'max', 'seconds', 'after', 'execution'],
             classifiers=['Development Status :: 5 - Production/Stable',
                          'Programming Language :: Python',
-                         'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)'
+                         'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
                          'Programming Language :: Python :: 2',
                           'Programming Language :: Python :: 2.7',
                           'Programming Language :: Python :: 3.4',
