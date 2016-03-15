@@ -1,0 +1,7 @@
+include setup.py
+include LICENSE
+include README.md
+include README.rst
+include MANIFEST.in
+recursive-include func_timeout *.py
+recursive-include doc *.html
