@@ -73,4 +73,6 @@ Support
 
 I've tested func\_timeout with python 2.7, 3.4, and 3.5. It should work on other versions as well.
 
-ChangeLog can be found at https://github.com/kata198/func_timeout/ChangeLog
+ChangeLog can be found at https://raw.githubusercontent.com/kata198/func_timeout/master/ChangeLog 
+
+Pydoc can be found at: http://htmlpreview.github.io/?https://github.com/kata198/func_timeout/blob/master/doc/func_timeout.html?vers=1
