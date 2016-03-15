@@ -71,4 +71,6 @@ So, for esxample, if you have a function "doit('arg1', 'arg2')" that you want to
 Support
 -------
 
-I've tested func_timeout with python 2.7 and python 3.5.
+I've tested func\_timeout with python 2.7, 3.4, and 3.5. It should work on other versions as well.
+
+ChangeLog can be found at https://github.com/kata198/func_timeout/ChangeLog

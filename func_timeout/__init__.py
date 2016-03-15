@@ -5,12 +5,11 @@
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
 '''
 
-import sys
 import threading
 import time
 
-__version__ = '1.0.0'
-__version_tuple__ = (1, 0, 0)
+__version__ = '1.0.1'
+__version_tuple__ = (1, 0, 1)
 
 __all__ = ('func_timeout', 'FunctionTimedOut')
 
@@ -39,7 +38,6 @@ def func_timeout(timeout, func, args=(), kwargs=None):
     exception = []
 
     def funcwrap(args2, kwargs2):
-        sys.stdout.write('Args2: %s\nkwargs2: %s\n' %(str(args2), str(kwargs2)))
         try:
             ret.append( func(*args2, **kwargs2) )
         except Exception as e:
