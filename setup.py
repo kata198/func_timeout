@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     setup(name='func_timeout',
             version='1.0.0',
-            packages=['func_timeout']
+            packages=['func_timeout'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
             maintainer='Tim Savannah',
@@ -40,8 +40,8 @@ if __name__ == '__main__':
             description=summary,
             long_description=long_description,
             license='LGPLv2',
-            keywords=['function', 'timeout', 'call', 'terminate', 'runtime', 'max', 'seconds', 'after', 'execution']
-            classifiers=['Development Status :: 5 - Production/Stable'
+            keywords=['function', 'timeout', 'call', 'terminate', 'runtime', 'max', 'seconds', 'after', 'execution'],
+            classifiers=['Development Status :: 5 - Production/Stable',
                          'Programming Language :: Python',
                          'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)'
                          'Programming Language :: Python :: 2',
