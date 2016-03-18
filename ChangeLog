@@ -1,5 +1,8 @@
-* 2.0.0 - Mar 18 2016
+* 3.0.0 - Mar 18 2016
 - Change implementation to not leave lingering threads after a timeout occurs
+- Split module into several parts
+- Exportable "StoppableThread" impl, I may release later as a standalone
+package.
 
 * 1.0.1 - Mar 15 2016
 - Remove debugging print

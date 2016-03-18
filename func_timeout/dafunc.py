@@ -1,3 +1,9 @@
+'''
+    Copyright (c) 2016 Tim Savannah All Rights Reserved.
+
+    Licensed under the Lesser GNU Public License Version 3, LGPLv3. You should have recieved a copy of this with the source distribution as
+    LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
+'''
 import threading
 import time
 
@@ -46,10 +52,10 @@ def func_timeout(timeout, func, args=(), kwargs=None):
     stopException = None
     if thread.isAlive():
         isStopped = True
-        stopException = FunctionTimedOut('Function %s (args=%s) (kwargs=%s) timed out after %f seconds.\n' %(func.__name__, str(args), str(kwargs), timeout))
+        stopException = FunctionTimedOut 
         thread._stopThread(stopException)
         thread.join(.1)
-        raise stopException
+        raise FunctionTimedOut('Function %s (args=%s) (kwargs=%s) timed out after %f seconds.\n' %(func.__name__, str(args), str(kwargs), timeout))
 
     if exception:
         raise exception[0]

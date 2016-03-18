@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module func_timeout.dafunc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="func_timeout.html"><font color="#ffffff">func_timeout</font></a>.dafunc</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="func_timeout.html">index</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="threading.html">threading</a><br>
+</td><td width="25%" valign=top><a href="time.html">time</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-func_timeout"><strong>func_timeout</strong></a>(timeout, func, args=(), kwargs=None)</dt><dd><tt>func_timeout&nbsp;-&nbsp;Runs&nbsp;the&nbsp;given&nbsp;function&nbsp;for&nbsp;up&nbsp;to&nbsp;#timeout#&nbsp;seconds.<br>
+&nbsp;<br>
+Raises&nbsp;any&nbsp;exceptions&nbsp;#func#&nbsp;would&nbsp;raise,&nbsp;returns&nbsp;what&nbsp;#func#&nbsp;would&nbsp;return&nbsp;(unless&nbsp;timeout&nbsp;is&nbsp;exceeded),&nbsp;in&nbsp;which&nbsp;case&nbsp;it&nbsp;raises&nbsp;FunctionTimedOut<br>
+&nbsp;<br>
+@param&nbsp;timeout&nbsp;&lt;float&gt;&nbsp;-&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;run&nbsp;#func#&nbsp;before&nbsp;terminating<br>
+@param&nbsp;func&nbsp;&lt;function&gt;&nbsp;-&nbsp;The&nbsp;function&nbsp;to&nbsp;call<br>
+@param&nbsp;args&nbsp;&nbsp;&nbsp;&nbsp;&lt;tuple&gt;&nbsp;-&nbsp;Any&nbsp;ordered&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function<br>
+@param&nbsp;kwargs&nbsp;&nbsp;&lt;dict/None&gt;&nbsp;-&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function.<br>
+&nbsp;<br>
+@raises&nbsp;-&nbsp;FunctionTimedOut&nbsp;if&nbsp;#timeout#&nbsp;is&nbsp;exceeded,&nbsp;otherwise&nbsp;anything&nbsp;#func#&nbsp;could&nbsp;raise&nbsp;will&nbsp;be&nbsp;raised<br>
+&nbsp;<br>
+@return&nbsp;-&nbsp;The&nbsp;return&nbsp;value&nbsp;that&nbsp;#func#&nbsp;gives</tt></dd></dl>
+</td></tr></table>
+</body></html>

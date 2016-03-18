@@ -1,7 +1,15 @@
+'''
+    Copyright (c) 2016 Tim Savannah All Rights Reserved.
+
+    Licensed under the Lesser GNU Public License Version 3, LGPLv3. You should have recieved a copy of this with the source distribution as
+    LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
+'''
 
 import ctypes
 import threading
 import time
+
+__all__ = ('StoppableThread', 'JoinThread')
 
 class StoppableThread(threading.Thread):
     '''
@@ -13,8 +21,10 @@ class StoppableThread(threading.Thread):
         if self.isAlive() is False:
             return True
 
+        self._stderr = open('/dev/null', 'w')
         joinThread = JoinThread(self, exception)
         joinThread.start()
+        joinThread._stderr = self._stderr
 
 class JoinThread(threading.Thread):
     '''
