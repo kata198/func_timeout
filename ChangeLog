@@ -1,3 +1,6 @@
+* 3.0.1 - Mar 21 2016
+- Update documentation
+
 * 3.0.0 - Mar 18 2016
 - Change implementation to not leave lingering threads after a timeout occurs
 - Split module into several parts

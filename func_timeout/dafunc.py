@@ -23,6 +23,20 @@ def func_timeout(timeout, func, args=(), kwargs=None):
 
         @raises - FunctionTimedOut if #timeout# is exceeded, otherwise anything #func# could raise will be raised
 
+        If the timeout is exceeded, FunctionTimedOut will be raised within the context of the called function every two seconds until it terminates,
+        but will not block the calling thread (a new thread will be created to perform the join). If possible, you should try/except FunctionTimedOut
+        to return cleanly, but in most cases it will 'just work'.
+
+        Be careful of code like:
+        def myfunc():
+            while True:
+                try:
+                    dosomething()
+                except Exception:
+                    continue
+
+        because it will never terminate.
+
         @return - The return value that #func# gives
     '''
 

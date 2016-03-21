@@ -66,6 +66,13 @@ So, for esxample, if you have a function "doit('arg1', 'arg2')" that you want to
 
 		# Handle any exceptions that doit might raise here
 
+How it works
+------------
+
+func_timeout will run the specified function in a thread with the specified arguments until it returns, raises an exception, or the timeout is exceeded.
+If there is a return or an exception raised, it will be returned/raised as normal.
+
+If the timeout has exceeded, the "FunctionTimedOut" exception will be raised in the context of the function being called, as well as from the context of "func_timeout". You should have your function catch the "FunctionTimedOut" exception and exit cleanly if possible. Every 2 seconds until your function is terminated, it will continue to raise FunctionTimedOut. The terminating of the timed-out function happens in the context of the thread and will not block main execution.
 
 
 Support

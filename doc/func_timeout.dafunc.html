@@ -9,7 +9,10 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="func_timeout.html"><font color="#ffffff">func_timeout</font></a>.dafunc</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href="func_timeout.html">index</a></font></td></tr></table>
-    <p></p>
+    <p><tt>Copyright&nbsp;(c)&nbsp;2016&nbsp;Tim&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved.<br>
+&nbsp;<br>
+Licensed&nbsp;under&nbsp;the&nbsp;Lesser&nbsp;GNU&nbsp;Public&nbsp;License&nbsp;Version&nbsp;3,&nbsp;LGPLv3.&nbsp;You&nbsp;should&nbsp;have&nbsp;recieved&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;with&nbsp;the&nbsp;source&nbsp;distribution&nbsp;as<br>
+LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://github.com/kata198/func_timeout/LICENSE</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -36,6 +39,20 @@ Raises&nbsp;any&nbsp;exceptions&nbsp;#func#&nbsp;would&nbsp;raise,&nbsp;returns&
 @param&nbsp;kwargs&nbsp;&nbsp;&lt;dict/None&gt;&nbsp;-&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function.<br>
 &nbsp;<br>
 @raises&nbsp;-&nbsp;FunctionTimedOut&nbsp;if&nbsp;#timeout#&nbsp;is&nbsp;exceeded,&nbsp;otherwise&nbsp;anything&nbsp;#func#&nbsp;could&nbsp;raise&nbsp;will&nbsp;be&nbsp;raised<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;timeout&nbsp;is&nbsp;exceeded,&nbsp;FunctionTimedOut&nbsp;will&nbsp;be&nbsp;raised&nbsp;within&nbsp;the&nbsp;context&nbsp;of&nbsp;the&nbsp;called&nbsp;function&nbsp;every&nbsp;two&nbsp;seconds&nbsp;until&nbsp;it&nbsp;terminates,<br>
+but&nbsp;will&nbsp;not&nbsp;block&nbsp;the&nbsp;calling&nbsp;thread&nbsp;(a&nbsp;new&nbsp;thread&nbsp;will&nbsp;be&nbsp;created&nbsp;to&nbsp;perform&nbsp;the&nbsp;join).&nbsp;If&nbsp;possible,&nbsp;you&nbsp;should&nbsp;try/except&nbsp;FunctionTimedOut<br>
+to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;will&nbsp;'just&nbsp;work'.<br>
+&nbsp;<br>
+Be&nbsp;careful&nbsp;of&nbsp;code&nbsp;like:<br>
+def&nbsp;myfunc():<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dosomething()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;Exception:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>
+&nbsp;<br>
+because&nbsp;it&nbsp;will&nbsp;never&nbsp;terminate.<br>
 &nbsp;<br>
 @return&nbsp;-&nbsp;The&nbsp;return&nbsp;value&nbsp;that&nbsp;#func#&nbsp;gives</tt></dd></dl>
 </td></tr></table>
