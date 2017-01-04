@@ -1,3 +1,7 @@
+* 3.1.0 - Jan 4 2016
+- Make windows compatible 
+- Add simple testcase, "testit.py"
+
 * 3.0.1 - Mar 21 2016
 - Update documentation
 
