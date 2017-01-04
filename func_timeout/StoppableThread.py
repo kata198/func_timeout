@@ -5,6 +5,7 @@
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
 '''
 
+import os
 import ctypes
 import threading
 import time
@@ -21,7 +22,7 @@ class StoppableThread(threading.Thread):
         if self.isAlive() is False:
             return True
 
-        self._stderr = open('/dev/null', 'w')
+        self._stderr = open(os.devnull, 'w')
         joinThread = JoinThread(self, exception)
         joinThread.start()
         joinThread._stderr = self._stderr
