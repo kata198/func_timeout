@@ -7,7 +7,7 @@
 
 __all__ = ('FunctionTimedOut', 'RETRY_SAME_TIMEOUT')
 
-RETRY_SAME_TIMEOUT = '__rst'
+RETRY_SAME_TIMEOUT = 'RETRY_SAME_TIMEOUT'
 
 class FunctionTimedOut(BaseException):
     '''
@@ -19,7 +19,8 @@ class FunctionTimedOut(BaseException):
         @property timedOutArgs - Ordered args to function
         @property timedOutKwargs - Keyword args to function
 
-        @method retry - R
+        @method retry - Retries the function with same arguments, with option to run with original timeout, no timeout, or a different
+          explicit timeout. @see FunctionTimedOut.retry
     '''
 
 
@@ -53,7 +54,7 @@ class FunctionTimedOut(BaseException):
 
             @param timeout <float/RETRY_SAME_TIMEOUT/None> Default RETRY_SAME_TIMEOUT
                 
-                If RETRY_SAME_TIMEOUT : Will retry the function same args, sane timeout
+                If RETRY_SAME_TIMEOUT : Will retry the function same args, same timeout
                 If a float/int : Will retry the function same args with provided timeout
                 If None : Will retry function same args no timeout
 

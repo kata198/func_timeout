@@ -27,9 +27,13 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         Raises any exceptions #func# would raise, returns what #func# would return (unless timeout is exceeded), in which case it raises FunctionTimedOut
 
         @param timeout <float> - Maximum number of seconds to run #func# before terminating
+
         @param func <function> - The function to call
+
         @param args    <tuple> - Any ordered arguments to pass to the function
+
         @param kwargs  <dict/None> - Keyword arguments to pass to the function.
+
 
         @raises - FunctionTimedOut if #timeout# is exceeded, otherwise anything #func# could raise will be raised
 
@@ -38,6 +42,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         to return cleanly, but in most cases it will 'just work'.
 
         Be careful of code like:
+
         def myfunc():
             while True:
                 try:
@@ -93,7 +98,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
 
 def func_set_timeout(timeout, allowOverride=False):
     '''
-        set_timeout - Wrapper to run a function with a given/calculated timeout (max execution time).
+        func_set_timeout - Decorator to run a function with a given/calculated timeout (max execution time).
             Optionally (if #allowOverride is True), adds a paramater, "forceTimeout", to the
             function which, if provided, will override the default timeout for that invocation.
 
