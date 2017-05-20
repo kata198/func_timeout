@@ -7,3 +7,6 @@ include ChangeLog
 include testit.py
 recursive-include func_timeout *.py
 recursive-include doc *.html
+include tests/runTests.py
+include tests/README
+recursive-include tests/FuncTimeoutTests *.py

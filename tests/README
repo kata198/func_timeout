@@ -1,0 +1,3 @@
+Run ./runTests.py to execute all unit tests against parent directory "func_timeout" (will not run against site install.)
+
+This will download GoodTests.py if not already present in PATH, and use it to execute the unit tests in parallel, forcing resolution to the parent func_timeout dir
