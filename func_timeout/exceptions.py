@@ -36,6 +36,8 @@ class FunctionTimedOut(BaseException):
 
         BaseException.__init__(self, msg)
 
+        self.msg = msg
+
 
     def getMsg(self):
         '''
