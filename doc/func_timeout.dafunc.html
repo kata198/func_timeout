@@ -1,59 +1,116 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module func_timeout.dafunc</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head><body bgcolor="#f0f0f8">
+<html ><head ><title >Python: module func_timeout.dafunc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head><body bgcolor="#f0f0f8" >
 
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="func_timeout.html"><font color="#ffffff">func_timeout</font></a>.dafunc</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href="func_timeout.html">index</a></font></td></tr></table>
-    <p><tt>Copyright&nbsp;(c)&nbsp;2016&nbsp;Tim&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved.<br>
-&nbsp;<br>
-Licensed&nbsp;under&nbsp;the&nbsp;Lesser&nbsp;GNU&nbsp;Public&nbsp;License&nbsp;Version&nbsp;3,&nbsp;LGPLv3.&nbsp;You&nbsp;should&nbsp;have&nbsp;recieved&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;with&nbsp;the&nbsp;source&nbsp;distribution&nbsp;as<br>
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="heading" >
+<tr bgcolor="#7799ee" >
+<td valign="bottom" >&nbsp;<br />
+<font color="#ffffff" face="helvetica, arial" >&nbsp;<br /><big ><big ><strong ><a href="func_timeout.html" ><font color="#ffffff" >func_timeout</font></a>.dafunc</strong></big></big></font></td><td align="right" valign="bottom" ><font color="#ffffff" face="helvetica, arial" ><a href="func_timeout.html" >index</a></font></td></tr></table>
+    <p ><tt >Copyright&nbsp;(c)&nbsp;2016,&nbsp;2017&nbsp;Tim&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved.<br />
+&nbsp;<br />
+Licensed&nbsp;under&nbsp;the&nbsp;Lesser&nbsp;GNU&nbsp;Public&nbsp;License&nbsp;Version&nbsp;3,&nbsp;LGPLv3.&nbsp;You&nbsp;should&nbsp;have&nbsp;recieved&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;with&nbsp;the&nbsp;source&nbsp;distribution&nbsp;as<br />
 LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://github.com/kata198/func_timeout/LICENSE</tt></p>
-<p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#aa55cc">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<p >
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section" >
+<tr bgcolor="#aa55cc" >
+<td colspan="3" valign="bottom" >&nbsp;<br />
+<font color="#ffffff" face="helvetica, arial" ><big ><strong >Modules</strong></big></font></td></tr>
     
-<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="threading.html">threading</a><br>
-</td><td width="25%" valign=top><a href="time.html">time</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#eeaa77">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+<tr ><td bgcolor="#aa55cc" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
+<td width="100%" ><table width="100%" summary="list" ><tr ><td width="25%" valign="top" ><a href="copy.html" >copy</a><br />
+<a href="inspect.html" >inspect</a><br />
+</td><td width="25%" valign="top" ><a href="threading.html" >threading</a><br />
+<a href="time.html" >time</a><br />
+</td><td width="25%" valign="top" ><a href="types.html" >types</a><br />
+</td><td width="25%" valign="top" ></td></tr></table></td></tr></table><p >
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section" >
+<tr bgcolor="#eeaa77" >
+<td colspan="3" valign="bottom" >&nbsp;<br />
+<font color="#ffffff" face="helvetica, arial" ><big ><strong >Functions</strong></big></font></td></tr>
     
-<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-func_timeout"><strong>func_timeout</strong></a>(timeout, func, args=(), kwargs=None)</dt><dd><tt>func_timeout&nbsp;-&nbsp;Runs&nbsp;the&nbsp;given&nbsp;function&nbsp;for&nbsp;up&nbsp;to&nbsp;#timeout#&nbsp;seconds.<br>
-&nbsp;<br>
-Raises&nbsp;any&nbsp;exceptions&nbsp;#func#&nbsp;would&nbsp;raise,&nbsp;returns&nbsp;what&nbsp;#func#&nbsp;would&nbsp;return&nbsp;(unless&nbsp;timeout&nbsp;is&nbsp;exceeded),&nbsp;in&nbsp;which&nbsp;case&nbsp;it&nbsp;raises&nbsp;FunctionTimedOut<br>
-&nbsp;<br>
-@param&nbsp;timeout&nbsp;&lt;float&gt;&nbsp;-&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;run&nbsp;#func#&nbsp;before&nbsp;terminating<br>
-@param&nbsp;func&nbsp;&lt;function&gt;&nbsp;-&nbsp;The&nbsp;function&nbsp;to&nbsp;call<br>
-@param&nbsp;args&nbsp;&nbsp;&nbsp;&nbsp;&lt;tuple&gt;&nbsp;-&nbsp;Any&nbsp;ordered&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function<br>
-@param&nbsp;kwargs&nbsp;&nbsp;&lt;dict/None&gt;&nbsp;-&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function.<br>
-&nbsp;<br>
-@raises&nbsp;-&nbsp;FunctionTimedOut&nbsp;if&nbsp;#timeout#&nbsp;is&nbsp;exceeded,&nbsp;otherwise&nbsp;anything&nbsp;#func#&nbsp;could&nbsp;raise&nbsp;will&nbsp;be&nbsp;raised<br>
-&nbsp;<br>
-If&nbsp;the&nbsp;timeout&nbsp;is&nbsp;exceeded,&nbsp;FunctionTimedOut&nbsp;will&nbsp;be&nbsp;raised&nbsp;within&nbsp;the&nbsp;context&nbsp;of&nbsp;the&nbsp;called&nbsp;function&nbsp;every&nbsp;two&nbsp;seconds&nbsp;until&nbsp;it&nbsp;terminates,<br>
-but&nbsp;will&nbsp;not&nbsp;block&nbsp;the&nbsp;calling&nbsp;thread&nbsp;(a&nbsp;new&nbsp;thread&nbsp;will&nbsp;be&nbsp;created&nbsp;to&nbsp;perform&nbsp;the&nbsp;join).&nbsp;If&nbsp;possible,&nbsp;you&nbsp;should&nbsp;try/except&nbsp;FunctionTimedOut<br>
-to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;will&nbsp;'just&nbsp;work'.<br>
-&nbsp;<br>
-Be&nbsp;careful&nbsp;of&nbsp;code&nbsp;like:<br>
-def&nbsp;myfunc():<br>
-&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dosomething()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;Exception:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>
-&nbsp;<br>
-because&nbsp;it&nbsp;will&nbsp;never&nbsp;terminate.<br>
-&nbsp;<br>
+<tr ><td bgcolor="#eeaa77" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
+<td width="100%" ><dl ><dt ><a name="-func_set_timeout" ><strong >func_set_timeout</strong></a>(timeout, allowOverride=False)</dt><dd ><tt >set_timeout&nbsp;-&nbsp;Wrapper&nbsp;to&nbsp;run&nbsp;a&nbsp;function&nbsp;with&nbsp;a&nbsp;given/calculated&nbsp;timeout&nbsp;(max&nbsp;execution&nbsp;time).<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Optionally&nbsp;(if&nbsp;#allowOverride&nbsp;is&nbsp;True),&nbsp;adds&nbsp;a&nbsp;paramater,&nbsp;"forceTimeout",&nbsp;to&nbsp;the<br />
+&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;which,&nbsp;if&nbsp;provided,&nbsp;will&nbsp;override&nbsp;the&nbsp;default&nbsp;timeout&nbsp;for&nbsp;that&nbsp;invocation.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;#timeout&nbsp;is&nbsp;provided&nbsp;as&nbsp;a&nbsp;lambda/function,&nbsp;it&nbsp;will&nbsp;be&nbsp;called<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prior&nbsp;to&nbsp;each&nbsp;invocation&nbsp;of&nbsp;the&nbsp;decorated&nbsp;function&nbsp;to&nbsp;calculate&nbsp;the&nbsp;timeout&nbsp;to&nbsp;be&nbsp;used<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;that&nbsp;call,&nbsp;based&nbsp;on&nbsp;the&nbsp;arguments&nbsp;passed&nbsp;to&nbsp;the&nbsp;decorated&nbsp;function.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example,&nbsp;you&nbsp;may&nbsp;have&nbsp;a&nbsp;"processData"&nbsp;function&nbsp;whose&nbsp;execution&nbsp;time<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depends&nbsp;on&nbsp;the&nbsp;number&nbsp;of&nbsp;"data"&nbsp;elements,&nbsp;so&nbsp;you&nbsp;may&nbsp;want&nbsp;a&nbsp;million&nbsp;elements&nbsp;to&nbsp;have&nbsp;a&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;much&nbsp;higher&nbsp;timeout&nbsp;than&nbsp;seven&nbsp;elements.)<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;#allowOverride&nbsp;is&nbsp;True&nbsp;AND&nbsp;a&nbsp;kwarg&nbsp;of&nbsp;"forceTimeout"&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;wrapped&nbsp;function,&nbsp;that&nbsp;timeout<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;that&nbsp;single&nbsp;call.<br />
+&nbsp;<br />
+@param&nbsp;timeout&nbsp;&lt;float&nbsp;OR&nbsp;lambda/function&gt;&nbsp;-&nbsp;<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;**If&nbsp;float:**<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;number&nbsp;of&nbsp;seconds&nbsp;max&nbsp;to&nbsp;allow&nbsp;function&nbsp;to&nbsp;execute<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;throwing&nbsp;FunctionTimedOut<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;**If&nbsp;lambda/function:<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;function/lambda&nbsp;is&nbsp;provided,&nbsp;it&nbsp;will&nbsp;be&nbsp;called&nbsp;for&nbsp;every<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invocation&nbsp;of&nbsp;the&nbsp;decorated&nbsp;function&nbsp;(unless&nbsp;#allowOverride=True&nbsp;and&nbsp;"forceTimeout"&nbsp;was&nbsp;passed)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;determine&nbsp;the&nbsp;timeout&nbsp;to&nbsp;use&nbsp;based&nbsp;on&nbsp;the&nbsp;arguments&nbsp;to&nbsp;the&nbsp;decorated&nbsp;function.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;arguments&nbsp;as&nbsp;passed&nbsp;into&nbsp;the&nbsp;decorated&nbsp;function&nbsp;will&nbsp;be&nbsp;passed&nbsp;to&nbsp;this&nbsp;function.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;They&nbsp;either&nbsp;must&nbsp;match&nbsp;exactly&nbsp;to&nbsp;what&nbsp;the&nbsp;decorated&nbsp;function&nbsp;has,&nbsp;OR<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;you&nbsp;prefer&nbsp;to&nbsp;get&nbsp;the&nbsp;*args&nbsp;(list&nbsp;of&nbsp;ordered&nbsp;args)&nbsp;and&nbsp;**kwargs&nbsp;(&nbsp;key&nbsp;:&nbsp;value&nbsp;&nbsp;keyword&nbsp;args&nbsp;form),<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;define&nbsp;your&nbsp;calculate&nbsp;function&nbsp;like:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;calculateTimeout(*args,&nbsp;**kwargs):<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;lambda&nbsp;like:<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculateTimeout&nbsp;=&nbsp;lambda&nbsp;*args,&nbsp;**kwargs&nbsp;:&nbsp;...<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;otherwise&nbsp;the&nbsp;args&nbsp;to&nbsp;your&nbsp;calculate&nbsp;function&nbsp;should&nbsp;match&nbsp;exactly&nbsp;the&nbsp;decorated&nbsp;function.<br />
+&nbsp;<br />
+&nbsp;<br />
+@param&nbsp;allowOverride&nbsp;&lt;bool&gt;&nbsp;Default&nbsp;False,&nbsp;if&nbsp;True&nbsp;adds&nbsp;a&nbsp;keyword&nbsp;argument&nbsp;to&nbsp;the&nbsp;decorated&nbsp;function,<br />
+&nbsp;&nbsp;&nbsp;&nbsp;"forceTimeout"&nbsp;which,&nbsp;if&nbsp;provided,&nbsp;will&nbsp;override&nbsp;the&nbsp;#timeout.&nbsp;If&nbsp;#timeout&nbsp;was&nbsp;provided&nbsp;as&nbsp;a&nbsp;lambda&nbsp;/&nbsp;function,&nbsp;it<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;not&nbsp;be&nbsp;called.<br />
+&nbsp;<br />
+@throws&nbsp;FunctionTimedOut&nbsp;If&nbsp;time&nbsp;alloted&nbsp;passes&nbsp;without&nbsp;function&nbsp;returning&nbsp;naturally<br />
+&nbsp;<br />
+@see&nbsp;func_timeout</tt></dd></dl>
+ <dl ><dt ><a name="-func_timeout" ><strong >func_timeout</strong></a>(timeout, func, args=(), kwargs=None)</dt><dd ><tt >func_timeout&nbsp;-&nbsp;Runs&nbsp;the&nbsp;given&nbsp;function&nbsp;for&nbsp;up&nbsp;to&nbsp;#timeout#&nbsp;seconds.<br />
+&nbsp;<br />
+Raises&nbsp;any&nbsp;exceptions&nbsp;#func#&nbsp;would&nbsp;raise,&nbsp;returns&nbsp;what&nbsp;#func#&nbsp;would&nbsp;return&nbsp;(unless&nbsp;timeout&nbsp;is&nbsp;exceeded),&nbsp;in&nbsp;which&nbsp;case&nbsp;it&nbsp;raises&nbsp;FunctionTimedOut<br />
+&nbsp;<br />
+@param&nbsp;timeout&nbsp;&lt;float&gt;&nbsp;-&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;run&nbsp;#func#&nbsp;before&nbsp;terminating<br />
+@param&nbsp;func&nbsp;&lt;function&gt;&nbsp;-&nbsp;The&nbsp;function&nbsp;to&nbsp;call<br />
+@param&nbsp;args&nbsp;&nbsp;&nbsp;&nbsp;&lt;tuple&gt;&nbsp;-&nbsp;Any&nbsp;ordered&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function<br />
+@param&nbsp;kwargs&nbsp;&nbsp;&lt;dict/None&gt;&nbsp;-&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function.<br />
+&nbsp;<br />
+@raises&nbsp;-&nbsp;FunctionTimedOut&nbsp;if&nbsp;#timeout#&nbsp;is&nbsp;exceeded,&nbsp;otherwise&nbsp;anything&nbsp;#func#&nbsp;could&nbsp;raise&nbsp;will&nbsp;be&nbsp;raised<br />
+&nbsp;<br />
+If&nbsp;the&nbsp;timeout&nbsp;is&nbsp;exceeded,&nbsp;FunctionTimedOut&nbsp;will&nbsp;be&nbsp;raised&nbsp;within&nbsp;the&nbsp;context&nbsp;of&nbsp;the&nbsp;called&nbsp;function&nbsp;every&nbsp;two&nbsp;seconds&nbsp;until&nbsp;it&nbsp;terminates,<br />
+but&nbsp;will&nbsp;not&nbsp;block&nbsp;the&nbsp;calling&nbsp;thread&nbsp;(a&nbsp;new&nbsp;thread&nbsp;will&nbsp;be&nbsp;created&nbsp;to&nbsp;perform&nbsp;the&nbsp;join).&nbsp;If&nbsp;possible,&nbsp;you&nbsp;should&nbsp;try/except&nbsp;FunctionTimedOut<br />
+to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;will&nbsp;'just&nbsp;work'.<br />
+&nbsp;<br />
+Be&nbsp;careful&nbsp;of&nbsp;code&nbsp;like:<br />
+def&nbsp;myfunc():<br />
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dosomething()<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;Exception:<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br />
+&nbsp;<br />
+because&nbsp;it&nbsp;will&nbsp;never&nbsp;terminate.<br />
+&nbsp;<br />
 @return&nbsp;-&nbsp;The&nbsp;return&nbsp;value&nbsp;that&nbsp;#func#&nbsp;gives</tt></dd></dl>
-</td></tr></table>
-</body></html>
+</td></tr></table><p >
+<table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section" >
+<tr bgcolor="#55aa55" >
+<td colspan="3" valign="bottom" >&nbsp;<br />
+<font color="#ffffff" face="helvetica, arial" ><big ><strong >Data</strong></big></font></td></tr>
+    
+<tr ><td bgcolor="#55aa55" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
+<td width="100%" ><strong >__all__</strong> = ('func_timeout', 'func_set_timeout')</td></tr></table>
+</p></p></p></body></html>
