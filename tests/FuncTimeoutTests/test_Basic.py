@@ -116,6 +116,32 @@ class TestBasic(object):
         gc.collect()
 
         assert threading.active_count() == 1 , 'Expected other threads to get cleaned up after gc collection'
+
+    def test_exception(self):
+        sleepFunction = getSleepLambda(.5)
+
+        expectedResult = 5 + 19
+
+        gotException = False
+        functionTimedOut = None
+
+        startTime = time.time()
+        try:
+            result = func_timeout(.3, sleepFunction, args=(5, 19))
+        except FunctionTimedOut as fte:
+            functionTimedOut = fte
+            gotException = True
+        endTime = time.time()
+
+        assert gotException , 'Expected to get exception'
+
+        assert 'timed out after ' in functionTimedOut.msg  , 'Expected message to be constructed. Got: %s' %(repr(functionTimedOut.msg), )
+        assert round(functionTimedOut.timedOutAfter, 1) == .3 , 'Expected timedOutAfter to equal timeout ( .3 ). Got: %s' %(str(round(functionTimedOut.timedOutAfter, 1)), )
+        assert functionTimedOut.timedOutFunction == sleepFunction , 'Expected timedOutFunction to equal sleepFunction'
+        assert functionTimedOut.timedOutArgs == (5, 19) , 'Expected args to equal (5, 19)'
+        assert functionTimedOut.timedOutKwargs == {} , 'Expected timedOutKwargs to equal {}'
+        
+
         
         
 
