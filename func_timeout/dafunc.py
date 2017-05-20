@@ -81,7 +81,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         stopException = FunctionTimedOut 
         thread._stopThread(stopException)
         thread.join(.1)
-        raise FunctionTimedOut('Function %s (args=%s) (kwargs=%s) timed out after %f seconds.\n' %(func.__name__, str(args), str(kwargs), timeout))
+        raise FunctionTimedOut('', timeout, func, args, kwargs)
 
     if exception:
         raise exception[0]
