@@ -1,5 +1,5 @@
 '''
-    Copyright (c) 2016 Tim Savannah All Rights Reserved.
+    Copyright (c) 2016, 2017 Tim Savannah All Rights Reserved.
 
     Licensed under the Lesser GNU Public License Version 3, LGPLv3. You should have recieved a copy of this with the source distribution as
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
@@ -9,6 +9,17 @@ import time
 
 from .exceptions import FunctionTimedOut
 from .StoppableThread import StoppableThread
+
+__all__ = ('set_timeout', 'func_timeout')
+
+
+def set_timeout(timeout):
+    def _function_decorator(func):
+        def _function_wrapper(*args, **kwargs):
+            return func_timeout(timeout, func, args=args, kwargs=kwargs)
+        return _function_wrapper
+
+    return _function_decorator
 
 def func_timeout(timeout, func, args=(), kwargs=None):
     '''
