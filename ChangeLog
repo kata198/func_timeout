@@ -1,6 +1,18 @@
 * 4.0.0 - May 19 2017
-- Add "set_timeout" as a function decorator which takes a timeout value in
-seconds to apply func_timeout to all calls of that function
+
+- Fixup short delay after a thread times out
+
+- Fix where in some cases (depending on what was execution when abort was
+
+called), a default handler could print the tracback to stderr outside of the
+scope of the normal raise (it would still be raised, just handled twice).
+
+- Add a function decorator which provides a default timeout, allows that
+timeout to be overriden by adding a "forceTimeout" kwarg to the function
+(configurable), or even running a function to calculate the timeout based on
+args for each call
+
+- Add GoodTests (Unit tests)
 
 * 3.1.0 - Jan 4 2017
 - Make windows compatible 
