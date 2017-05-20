@@ -70,6 +70,10 @@ class ARG_NO_DEFAULT_TYPE(object):
 
 ARG_NO_DEFAULT = ARG_NO_DEFAULT_TYPE()
 
+def getUniqueID(prefix):
+    uniqueName = prefix + '_' + str(uuid.uuid4().hex)
+    return uniqueName
+
 def getSleepLambda(sleepTime):
     '''
         getSleepLambda - Get a lambda that takes two integer arguments (a, b) 
@@ -87,7 +91,9 @@ def getSleepLambda(sleepTime):
     # Ensure we don't get a strange reference override on somne versions of python
     _sleepTime = copy.copy(sleepTime) 
 
-    return lambda a, b : int(bool(time.sleep(_sleepTime))) + a + b
+    
+
+    return eval('''lambda a, b : int(bool(time.sleep(%f))) + a + b''' %(_sleepTime,))
 
 
 def getSleepLambdaWithArgs(sleepTime, args):
@@ -137,8 +143,6 @@ def getSleepLambdaWithArgs(sleepTime, args):
 
     sumStr = ' + '.join(argNames)
 
-
-#    lambdaName = 'tmplambda_' + str(uuid.uuid4().hex)
 
 #    print ( 'Function is: %s' %('''lambda %s : int(bool(time.sleep(%f))) + %s''' %(argStr, sleepTime, sumStr, )  ) )
     return eval('''lambda %s : int(bool(time.sleep(%f))) + %s''' % (argStr, sleepTime, sumStr, ) )

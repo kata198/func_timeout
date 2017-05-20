@@ -34,12 +34,24 @@ class TestBasicSleep(object):
 
         assert compareTimes(endTime, startTime, 2, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(2) to take 2 seconds.'
 
-        sleepLambda = getSleepLambda(3.1)
+        sleepLambda = getSleepLambda(1.75)
+
+        expectedResult = 2 + 3
         startTime = time.time()
-        sleepLambda(2, 3)
+        result = sleepLambda(2, 3)
         endTime = time.time()
 
-        assert compareTimes(endTime, startTime, 3.1, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(3.1) to take 3.1 seconds.'
+        assert result == expectedResult , 'Got wrong result'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(1.75) to take 1.75 seconds.'
+
+        expectedResult = 5 + 13
+
+        startTime = time.time()
+        result = sleepLambda(5, 13)
+        endTime = time.time()
+
+        assert result == expectedResult , 'Did not get return from sleepFunction'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(1.75) to take 1.75 seconds.'
 
 if __name__ == '__main__':
     sys.exit(subprocess.Popen('GoodTests.py -n1 "%s" %s' %(sys.argv[0], ' '.join(['"%s"' %(arg.replace('"', '\\"'), ) for arg in sys.argv[1:]]) ), shell=True).wait())

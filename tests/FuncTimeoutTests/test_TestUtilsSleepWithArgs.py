@@ -44,15 +44,26 @@ class TestBasicSleepWithArgs(object):
 
 
 
-        sleepLambda = getSleepLambdaWithArgs(3.1, [ ('a', ), ('xxx', )] )
+        expectedResult = 2 + 3
+        sleepLambda = getSleepLambdaWithArgs(1.75, [ ('a', ), ('xxx', )] )
         startTime = time.time()
         try:
-            sleepLambda(xxx=2, a=3)
+            result = sleepLambda(xxx=2, a=3)
         except:
             raise AssertionError('Expected to be able to use provided field names when calling function')
         endTime = time.time()
 
-        assert compareTimes(endTime, startTime, 3.1, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(3.1) to take 3.1 seconds.'
+        assert result == expectedResult , 'Got wrong result'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(1.75) to take 1.75 seconds.'
+
+        expectedResult = 5 + 13
+
+        startTime = time.time()
+        result = sleepLambda(5, 13)
+        endTime = time.time()
+
+        assert result == expectedResult , 'Did not get return from sleepFunction'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(1.75) to take 1.75 seconds.'
     
 if __name__ == '__main__':
     sys.exit(subprocess.Popen('GoodTests.py -n1 "%s" %s' %(sys.argv[0], ' '.join(['"%s"' %(arg.replace('"', '\\"'), ) for arg in sys.argv[1:]]) ), shell=True).wait())
