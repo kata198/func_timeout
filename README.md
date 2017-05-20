@@ -25,6 +25,16 @@ This is the function wherein you pass the timeout, the function you want to call
 			@return - The return value that #func# gives
 		'''
 
+**set\_timeout**
+
+This is a decorator you can use on functions to apply func\_timeout. Takes a single argument -- timeout.
+
+Example:
+
+	@set_timeout(2.5)
+	def myFunction(self, arg1, arg2):
+		...
+
 **FunctionTimedOut**
 
 Exception raised if the function times out
