@@ -14,11 +14,44 @@ __all__ = ('set_timeout', 'func_timeout')
 
 
 def set_timeout(timeout):
+    '''
+        set_timeout - Wrapper to run a function with a given timeout (max execution time)
+
+        @param timeout <float> - Number of seconds max to allow function to execute
+
+        @throws FunctionTimedOut If time alloted passes without function returning naturally
+
+        @see func_timeout
+        @see set_modifiable_timeout
+    '''
     def _function_decorator(func):
         def _function_wrapper(*args, **kwargs):
             return func_timeout(timeout, func, args=args, kwargs=kwargs)
         return _function_wrapper
 
+    return _function_decorator
+
+def set_modifiable_timeout(timeout):
+    '''
+        set_modifiable_timeout - Wrapper to run a function with a given timeout (max execution time)
+            which can be overriden by passing "forceTimeout" to the function being decorated
+
+        @param timeout <float> - Default Number of seconds max to allow function to execute
+
+        @throws FunctionTimedOut If time alloted passes without function returning naturally
+
+        @see func_timeout
+        @see set_timeout
+    '''
+    def _function_decorator(func):
+        def _function_wrapper(*args, **kwargs):
+            if 'forceTimeout' in kwargs:
+                useTimeout = kwargs.pop('forceTimeout')
+            else:
+                useTimeout = timeout
+
+            return func_timeout(useTimeout, func, args=args, kwargs=kwargs)
+        return _function_wrapper
     return _function_decorator
 
 def func_timeout(timeout, func, args=(), kwargs=None):

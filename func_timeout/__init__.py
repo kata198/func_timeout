@@ -9,7 +9,7 @@
 __version__ = '4.0.0'
 __version_tuple__ = (4, 0, 0)
 
-__all__ = ('func_timeout', 'set_timeout', 'FunctionTimedOut')
+__all__ = ('func_timeout', 'set_timeout', 'set_modifiable_timeout', 'FunctionTimedOut')
 
 from .exceptions import FunctionTimedOut
-from .dafunc import func_timeout, set_timeout
+from .dafunc import func_timeout, set_timeout, set_modifiable_timeout
