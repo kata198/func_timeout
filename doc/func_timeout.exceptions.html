@@ -41,7 +41,8 @@ LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://gith
 @property&nbsp;timedOutArgs&nbsp;-&nbsp;Ordered&nbsp;args&nbsp;to&nbsp;function<br />
 @property&nbsp;timedOutKwargs&nbsp;-&nbsp;Keyword&nbsp;args&nbsp;to&nbsp;function<br />
 &nbsp;<br />
-@method&nbsp;retry&nbsp;-&nbsp;R<br />&nbsp;</tt></td></tr>
+@method&nbsp;retry&nbsp;-&nbsp;Retries&nbsp;the&nbsp;function&nbsp;with&nbsp;same&nbsp;arguments,&nbsp;with&nbsp;option&nbsp;to&nbsp;run&nbsp;with&nbsp;original&nbsp;timeout,&nbsp;no&nbsp;timeout,&nbsp;or&nbsp;a&nbsp;different<br />
+&nbsp;&nbsp;explicit&nbsp;timeout.&nbsp;@see&nbsp;<a href="#FunctionTimedOut" >FunctionTimedOut</a>.retry<br />&nbsp;</tt></td></tr>
 <tr ><td >&nbsp;</td>
 <td width="100%" ><dl ><dt >Method resolution order:</dt>
 <dd ><a href="func_timeout.exceptions.html#FunctionTimedOut" >FunctionTimedOut</a></dd>
@@ -56,11 +57,11 @@ Methods defined here:<br />
 &nbsp;<br />
 @return&nbsp;&lt;str&gt;&nbsp;-&nbsp;Message</tt></dd></dl>
 
-<dl ><dt ><a name="FunctionTimedOut-retry" ><strong >retry</strong></a>(self, timeout='__rst')</dt><dd ><tt >retry&nbsp;-&nbsp;Retry&nbsp;the&nbsp;timed-out&nbsp;function&nbsp;with&nbsp;same&nbsp;arguments.<br />
+<dl ><dt ><a name="FunctionTimedOut-retry" ><strong >retry</strong></a>(self, timeout='RETRY_SAME_TIMEOUT')</dt><dd ><tt >retry&nbsp;-&nbsp;Retry&nbsp;the&nbsp;timed-out&nbsp;function&nbsp;with&nbsp;same&nbsp;arguments.<br />
 &nbsp;<br />
 @param&nbsp;timeout&nbsp;&lt;float/RETRY_SAME_TIMEOUT/None&gt;&nbsp;Default&nbsp;RETRY_SAME_TIMEOUT<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;RETRY_SAME_TIMEOUT&nbsp;:&nbsp;Will&nbsp;retry&nbsp;the&nbsp;function&nbsp;same&nbsp;args,&nbsp;sane&nbsp;timeout<br />
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;RETRY_SAME_TIMEOUT&nbsp;:&nbsp;Will&nbsp;retry&nbsp;the&nbsp;function&nbsp;same&nbsp;args,&nbsp;same&nbsp;timeout<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;float/int&nbsp;:&nbsp;Will&nbsp;retry&nbsp;the&nbsp;function&nbsp;same&nbsp;args&nbsp;with&nbsp;provided&nbsp;timeout<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;None&nbsp;:&nbsp;Will&nbsp;retry&nbsp;function&nbsp;same&nbsp;args&nbsp;no&nbsp;timeout<br />
 &nbsp;<br />
@@ -115,6 +116,6 @@ Data descriptors inherited from <a href="builtins.html#BaseException" >builtins.
 <font color="#ffffff" face="helvetica, arial" ><big ><strong >Data</strong></big></font></td></tr>
     
 <tr ><td bgcolor="#55aa55" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
-<td width="100%" ><strong >RETRY_SAME_TIMEOUT</strong> = '__rst'<br />
+<td width="100%" ><strong >RETRY_SAME_TIMEOUT</strong> = 'RETRY_SAME_TIMEOUT'<br />
 <strong >__all__</strong> = ('FunctionTimedOut', 'RETRY_SAME_TIMEOUT')</td></tr></table>
 </p></p></body></html>

@@ -30,7 +30,7 @@ LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://gith
 <font color="#ffffff" face="helvetica, arial" ><big ><strong >Functions</strong></big></font></td></tr>
     
 <tr ><td bgcolor="#eeaa77" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
-<td width="100%" ><dl ><dt ><a name="-func_set_timeout" ><strong >func_set_timeout</strong></a>(timeout, allowOverride=False)</dt><dd ><tt >set_timeout&nbsp;-&nbsp;Wrapper&nbsp;to&nbsp;run&nbsp;a&nbsp;function&nbsp;with&nbsp;a&nbsp;given/calculated&nbsp;timeout&nbsp;(max&nbsp;execution&nbsp;time).<br />
+<td width="100%" ><dl ><dt ><a name="-func_set_timeout" ><strong >func_set_timeout</strong></a>(timeout, allowOverride=False)</dt><dd ><tt >func_set_timeout&nbsp;-&nbsp;Decorator&nbsp;to&nbsp;run&nbsp;a&nbsp;function&nbsp;with&nbsp;a&nbsp;given/calculated&nbsp;timeout&nbsp;(max&nbsp;execution&nbsp;time).<br />
 &nbsp;&nbsp;&nbsp;&nbsp;Optionally&nbsp;(if&nbsp;#allowOverride&nbsp;is&nbsp;True),&nbsp;adds&nbsp;a&nbsp;paramater,&nbsp;"forceTimeout",&nbsp;to&nbsp;the<br />
 &nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;which,&nbsp;if&nbsp;provided,&nbsp;will&nbsp;override&nbsp;the&nbsp;default&nbsp;timeout&nbsp;for&nbsp;that&nbsp;invocation.<br />
 &nbsp;<br />
@@ -84,9 +84,13 @@ LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://gith
 Raises&nbsp;any&nbsp;exceptions&nbsp;#func#&nbsp;would&nbsp;raise,&nbsp;returns&nbsp;what&nbsp;#func#&nbsp;would&nbsp;return&nbsp;(unless&nbsp;timeout&nbsp;is&nbsp;exceeded),&nbsp;in&nbsp;which&nbsp;case&nbsp;it&nbsp;raises&nbsp;FunctionTimedOut<br />
 &nbsp;<br />
 @param&nbsp;timeout&nbsp;&lt;float&gt;&nbsp;-&nbsp;Maximum&nbsp;number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;run&nbsp;#func#&nbsp;before&nbsp;terminating<br />
+&nbsp;<br />
 @param&nbsp;func&nbsp;&lt;function&gt;&nbsp;-&nbsp;The&nbsp;function&nbsp;to&nbsp;call<br />
+&nbsp;<br />
 @param&nbsp;args&nbsp;&nbsp;&nbsp;&nbsp;&lt;tuple&gt;&nbsp;-&nbsp;Any&nbsp;ordered&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function<br />
+&nbsp;<br />
 @param&nbsp;kwargs&nbsp;&nbsp;&lt;dict/None&gt;&nbsp;-&nbsp;Keyword&nbsp;arguments&nbsp;to&nbsp;pass&nbsp;to&nbsp;the&nbsp;function.<br />
+&nbsp;<br />
 &nbsp;<br />
 @raises&nbsp;-&nbsp;FunctionTimedOut&nbsp;if&nbsp;#timeout#&nbsp;is&nbsp;exceeded,&nbsp;otherwise&nbsp;anything&nbsp;#func#&nbsp;could&nbsp;raise&nbsp;will&nbsp;be&nbsp;raised<br />
 &nbsp;<br />
@@ -95,6 +99,7 @@ but&nbsp;will&nbsp;not&nbsp;block&nbsp;the&nbsp;calling&nbsp;thread&nbsp;(a&nbsp
 to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;will&nbsp;'just&nbsp;work'.<br />
 &nbsp;<br />
 Be&nbsp;careful&nbsp;of&nbsp;code&nbsp;like:<br />
+&nbsp;<br />
 def&nbsp;myfunc():<br />
 &nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br />
