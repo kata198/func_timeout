@@ -8,6 +8,7 @@
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
 '''
 
+import copy
 import inspect
 import threading
 import time
