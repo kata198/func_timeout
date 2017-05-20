@@ -1,4 +1,4 @@
-* 4.0.0 - May 17 2017
+* 4.0.0 - May 19 2017
 - Add "set_timeout" as a function decorator which takes a timeout value in
 seconds to apply func_timeout to all calls of that function
 
