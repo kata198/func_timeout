@@ -61,6 +61,9 @@ def func_timeout(timeout, func, args=(), kwargs=None):
     def funcwrap(args2, kwargs2):
         try:
             ret.append( func(*args2, **kwargs2) )
+        except FunctionTimedOut:
+            # Don't print traceback to stderr if we time out
+            pass
         except Exception as e:
             if isStopped is False:
                 # Don't capture stopping exception
