@@ -80,7 +80,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         isStopped = True
         stopException = FunctionTimedOut 
         thread._stopThread(stopException)
-        thread.join(.1)
+        thread.join(min(.1, timeout / 50.0))
         raise FunctionTimedOut('', timeout, func, args, kwargs)
 
     if exception:
