@@ -37,24 +37,38 @@ This is the function wherein you pass the timeout, the function you want to call
 		'''
 
 
-**set_timeout**
+**func_set_timeout**
 
-This is a decorator you can use on functions to apply func_timeout. Takes a single argument -- timeout.
+This is a decorator you can use on functions to apply func_timeout.
+
+Takes two arguments, "timeout" and "allowOverride"
+
+If "allowOverride" is present, an optional keyword argument is added to the wrapped function, 'forceTimeout'. When provided, this will override the timeout used on this function.
+
+
+The "timeout" parameter can be either a number (for a fixed timeout), or a function/lambda. If a function/lambda is used, it will be passed the same arguments as the called function was passed. It should return a number which will be used as the timeout for that paticular run. For example, if you have a method that calculates data, you'll want a higher timeout for 1 million records than 50 records.
 
 Example:
 
-	@set_timeout(2.5)
+	@func_set_timeout(2.5)
 
 	def myFunction(self, arg1, arg2):
 
 		...
 
 
-
 **FunctionTimedOut**
 
-Exception raised if the function times out
+Exception raised if the function times out.
 
+
+Has a "retry" method which takes the following arguments:
+
+	* No argument - Retry same args, same function, same timeout
+
+	* Number argument - Retry same args, same function, provided timeout
+
+	* None - Retry same args, same function, no timeout
 
 Example
 -------
@@ -93,7 +107,7 @@ If the timeout has exceeded, the "FunctionTimedOut" exception will be raised in 
 Support
 -------
 
-I've tested func\_timeout with python 2.7, 3.4, and 3.5. It should work on other versions as well.
+I've tested func_timeout with python 2.7, 3.4, 3.5, 3.6. It should work on other versions as well.
 
 Works on windows, linux/unix, cygwin, mac
 
