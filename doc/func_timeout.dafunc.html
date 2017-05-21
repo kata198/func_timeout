@@ -98,17 +98,6 @@ If&nbsp;the&nbsp;timeout&nbsp;is&nbsp;exceeded,&nbsp;FunctionTimedOut&nbsp;will&
 but&nbsp;will&nbsp;not&nbsp;block&nbsp;the&nbsp;calling&nbsp;thread&nbsp;(a&nbsp;new&nbsp;thread&nbsp;will&nbsp;be&nbsp;created&nbsp;to&nbsp;perform&nbsp;the&nbsp;join).&nbsp;If&nbsp;possible,&nbsp;you&nbsp;should&nbsp;try/except&nbsp;FunctionTimedOut<br />
 to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;will&nbsp;'just&nbsp;work'.<br />
 &nbsp;<br />
-Be&nbsp;careful&nbsp;of&nbsp;code&nbsp;like:<br />
-&nbsp;<br />
-def&nbsp;myfunc():<br />
-&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;True:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dosomething()<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except&nbsp;Exception:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br />
-&nbsp;<br />
-because&nbsp;it&nbsp;will&nbsp;never&nbsp;terminate.<br />
-&nbsp;<br />
 @return&nbsp;-&nbsp;The&nbsp;return&nbsp;value&nbsp;that&nbsp;#func#&nbsp;gives</tt></dd></dl>
 </td></tr></table><p >
 <table width="100%" cellspacing="0" cellpadding="2" border="0" summary="section" >
