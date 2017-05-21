@@ -9,6 +9,7 @@ import os
 import ctypes
 import threading
 import time
+import sys
 
 __all__ = ('StoppableThread', 'JoinThread')
 
@@ -24,6 +25,7 @@ class StoppableThread(threading.Thread):
 
         self._stderr = open(os.devnull, 'w')
         joinThread = JoinThread(self, exception)
+        joinThread._stderr = self._stderr
         joinThread.start()
         joinThread._stderr = self._stderr
 
@@ -40,8 +42,21 @@ class JoinThread(threading.Thread):
         self.daemon = True
 
     def run(self):
+
+        # Try to silence default exception printing.
+        self.otherThread._Thread__stderr = self._stderr
+        if hasattr(self.otherThread, '_Thread__stop'):
+            # If py2, call this first to start thread termination cleanly.
+            #   Python3 does not need such ( nor does it provide.. )
+            self.otherThread._Thread__stop()
         while self.otherThread.isAlive():
             # We loop raising exception incase it's caught hopefully this breaks us far out.
             ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(self.otherThread.ident), ctypes.py_object(self.exception))
             self.otherThread.join(self.repeatEvery)
+
+        try:
+            self._stderr.close()
+        except:
+            pass
+
 

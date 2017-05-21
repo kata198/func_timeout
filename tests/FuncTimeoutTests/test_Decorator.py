@@ -382,12 +382,19 @@ class TestDecorator(object):
         assert compareTimes(endTime, startTime, SLEEP_TIME , None, .1) == 0 , 'Expected to sleep for 100% SLEEP_TIME with 80% timeout overriden on retry ( SLEEP_TIME * 1.5 ) [ 150% timeout ]'
         assert result == expected
         
-        time.sleep(.1)
-        gc.collect()
+        threadsCleanedUp = False
 
-        assert threading.active_count() == 1 , 'Expected other threads to get cleaned up after gc collection'
-        
-        
+        for i in range(5):
+            time.sleep(1)
+            gc.collect()
+
+            if threading.active_count() == 1:
+                threadsCleanedUp = True
+                break
+
+                
+        assert threadsCleanedUp , 'Expected other threads to get cleaned up after gc collection'
+
 
 if __name__ == '__main__':
     sys.exit(subprocess.Popen('GoodTests.py -n1 "%s" %s' %(sys.argv[0], ' '.join(['"%s"' %(arg.replace('"', '\\"'), ) for arg in sys.argv[1:]]) ), shell=True).wait())

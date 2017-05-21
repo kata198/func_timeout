@@ -112,10 +112,18 @@ class TestBasic(object):
         assert gotException , 'Expected to time out after .4 seconds when providing .4'
         assert compareTimes(endTime, startTime, .4, 3, .05, None) == 0 , 'Expected providing .4 would allow timeout of up to .4 seconds'
 
-        time.sleep(.1)
-        gc.collect()
+        threadsCleanedUp = False
 
-        assert threading.active_count() == 1 , 'Expected other threads to get cleaned up after gc collection'
+        for i in range(5):
+            time.sleep(1)
+            gc.collect()
+
+            if threading.active_count() == 1:
+                threadsCleanedUp = True
+                break
+
+                
+        assert threadsCleanedUp , 'Expected other threads to get cleaned up after gc collection'
 
     def test_exception(self):
         sleepFunction = getSleepLambda(.5)
