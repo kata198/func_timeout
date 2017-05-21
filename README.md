@@ -82,6 +82,13 @@ If there is a return or an exception raised, it will be returned/raised as norma
 
 If the timeout has exceeded, the "FunctionTimedOut" exception will be raised in the context of the function being called, as well as from the context of "func\_timeout". You should have your function catch the "FunctionTimedOut" exception and exit cleanly if possible. Every 2 seconds until your function is terminated, it will continue to raise FunctionTimedOut. The terminating of the timed-out function happens in the context of the thread and will not block main execution.
 
+
+Pydoc
+-----
+
+Find pydoc at https://pythonhosted.org/func_timeout
+
+
 Support
 -------
 
