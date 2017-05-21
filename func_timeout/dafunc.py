@@ -41,17 +41,6 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         but will not block the calling thread (a new thread will be created to perform the join). If possible, you should try/except FunctionTimedOut
         to return cleanly, but in most cases it will 'just work'.
 
-        Be careful of code like:
-
-        def myfunc():
-            while True:
-                try:
-                    dosomething()
-                except Exception:
-                    continue
-
-        because it will never terminate.
-
         @return - The return value that #func# gives
     '''
 
@@ -84,7 +73,14 @@ def func_timeout(timeout, func, args=(), kwargs=None):
     stopException = None
     if thread.isAlive():
         isStopped = True
-        stopException = FunctionTimedOut 
+
+        class FunctionTimedOutTempType(FunctionTimedOut):
+            def __init__(self):
+                return FunctionTimedOut.__init__(self, '', timeout, func, args, kwargs)
+
+        FunctionTimedOutTemp = type('FunctionTimedOut' + str( hash( "%d_%d_%d_%d" %(id(timeout), id(func), id(args), id(kwargs))) ), FunctionTimedOutTempType.__bases__, dict(FunctionTimedOutTempType.__dict__))
+
+        stopException = FunctionTimedOutTemp
         thread._stopThread(stopException)
         thread.join(min(.1, timeout / 50.0))
         raise FunctionTimedOut('', timeout, func, args, kwargs)
