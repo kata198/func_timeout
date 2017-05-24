@@ -61,9 +61,14 @@ def func_timeout(timeout, func, args=(), kwargs=None):
             # Don't print traceback to stderr if we time out
             pass
         except Exception as e:
+            exc_info = sys.exc_info()
             if isStopped is False:
-                # Don't capture stopping exception
-                exception.append(e)
+                # Assemble the alternate traceback, excluding this function
+                #  from the trace (by going to next frame)
+                # Pytohn3 reads native from __traceback__, 
+                # python2 has a different form for "raise"
+                e.__traceback__ = exc_info[2].tb_next
+                exception.append( e )
 
     thread = StoppableThread(target=funcwrap, args=(args, kwargs))
     thread.daemon = True
@@ -96,9 +101,10 @@ def func_timeout(timeout, func, args=(), kwargs=None):
             #  This, in effect, prevents the "funcwrap" wrapper ( chained
             #   in context to an exception raised here, due to scope )
             # Only available in python3.3+
-            exec('raise exception[0] from None', None, { 'exception' : exception })
+            exec('raise exception[0] from None', None, { 'exception' : exception, })
         else:
-            raise exception[0]
+            # Python2 allows specifying an alternate traceback.
+            exec('raise exception[0] , None, exception[0].__traceback__', None, {'exception' : exception})
 
     if ret:
         return ret[0]
