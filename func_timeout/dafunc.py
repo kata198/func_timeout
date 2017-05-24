@@ -13,6 +13,7 @@ import inspect
 import threading
 import time
 import types
+import sys
 
 from .exceptions import FunctionTimedOut
 from .StoppableThread import StoppableThread
@@ -90,7 +91,14 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         thread.join(.5)
 
     if exception:
-        raise exception[0]
+        if sys.version_info >= (3, 3):
+            # PEP 409 - Raise with the chained exception context disabled
+            #  This, in effect, prevents the "funcwrap" wrapper ( chained
+            #   in context to an exception raised here, due to scope )
+            # Only available in python3.3+
+            exec('raise exception[0] from None', None, { 'exception' : exception })
+        else:
+            raise exception[0]
 
     if ret:
         return ret[0]
