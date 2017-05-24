@@ -1,10 +1,30 @@
-* 4.0.1 - ??? ?? ????
+* 4.1.0 - May 24 2017
 
 - If func_timeout completes the function call in the alloted time, explicitly
 clean up the thread (previously we were only cleaning it up in the time-out
 path). On python3 it would get cleaned up anyway on the next garbage
 collection cycle, on python2 it's a bit more finnikey (but will also,
 eventually, get automatically joined)
+
+- Be better at the traceback. Exclude the funcwrap from the call, and ensure
+the raised Exception follows the actual path of execution (can be confusing to
+read at first glance, but your function is at the bottom, then goes around a
+bit.)
+
+This uses PEP409/3134 in Python3 (available in 3.3+, we support 3.4+
+officially).
+
+Python2 doesn't have this, but has it's own syntax that doesn't work in
+python3 to allow throwing a custom __traceback__.
+
+You'd think both would support both, or at least python3 support both...
+
+Anyway, this causes a kinda silly import-hack and adds an extra frame to the
+exception handling part, but works to prevent default handlers from picking it
+up.
+
+This solves the multiple prints of exceptions on python3 in certain
+circumstances(you catching and then raising an exception)
 
 
 * 4.0.0 - May 20 2017
