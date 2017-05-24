@@ -18,6 +18,13 @@ import sys
 from .exceptions import FunctionTimedOut
 from .StoppableThread import StoppableThread
 
+try:
+    from .py3_raise import raise_exception
+except SyntaxError:
+    from .py2_raise import raise_exception
+except ImportError:
+    from .py2_raise import raise_exception
+
 __all__ = ('func_timeout', 'func_set_timeout')
 
 
@@ -96,15 +103,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         thread.join(.5)
 
     if exception:
-        if sys.version_info >= (3, 3):
-            # PEP 409 - Raise with the chained exception context disabled
-            #  This, in effect, prevents the "funcwrap" wrapper ( chained
-            #   in context to an exception raised here, due to scope )
-            # Only available in python3.3+
-            exec('raise exception[0] from None', None, { 'exception' : exception, })
-        else:
-            # Python2 allows specifying an alternate traceback.
-            exec('raise exception[0] , None, exception[0].__traceback__', None, {'exception' : exception})
+        raise_exception(exception)
 
     if ret:
         return ret[0]
