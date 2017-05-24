@@ -1,3 +1,12 @@
+* 4.0.1 - ??? ?? ????
+
+- If func_timeout completes the function call in the alloted time, explicitly
+clean up the thread (previously we were only cleaning it up in the time-out
+path). On python3 it would get cleaned up anyway on the next garbage
+collection cycle, on python2 it's a bit more finnikey (but will also,
+eventually, get automatically joined)
+
+
 * 4.0.0 - May 20 2017
 
 - Fixup short delay after a thread times out
