@@ -84,6 +84,10 @@ def func_timeout(timeout, func, args=(), kwargs=None):
         thread._stopThread(stopException)
         thread.join(min(.1, timeout / 50.0))
         raise FunctionTimedOut('', timeout, func, args, kwargs)
+    else:
+        # We can still cleanup the thread here..
+        # Still give a timeout... just... cuz..
+        thread.join(.5)
 
     if exception:
         raise exception[0]
