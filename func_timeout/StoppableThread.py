@@ -29,6 +29,16 @@ class StoppableThread(threading.Thread):
         joinThread.start()
         joinThread._stderr = self._stderr
 
+    def stop(self, exception):
+        '''
+            Stops the thread by raising a given exception.
+
+            @param exception <Exception> - Exception to throw. Likely, you want to use something
+              that inherits from BaseException (so except Exception as e: continue; isn't a problem)
+        '''
+        return self._stopThread(exception)
+
+
 class JoinThread(threading.Thread):
     '''
         JoinThread - The workhouse that stops the StoppableThread
