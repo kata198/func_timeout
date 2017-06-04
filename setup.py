@@ -20,7 +20,7 @@ if __name__ == '__main__':
     if dirName and os.getcwd() != dirName:
         os.chdir(dirName)
 
-    summary = 'Python module which allows you to specify timeouts when calling any existing function'
+    summary = 'Python module which allows you to specify timeouts when calling any existing function. Also provides support for stoppable-threads'
 
     try:
         with open('README.rst', 'rt') as f:
@@ -48,6 +48,7 @@ if __name__ == '__main__':
                           'Programming Language :: Python :: 2.7',
                           'Programming Language :: Python :: 3.4',
                           'Programming Language :: Python :: 3.5',
+                          'Programming Language :: Python :: 3.6',
                           'Topic :: Software Development :: Libraries :: Python Modules'
             ]
     )
