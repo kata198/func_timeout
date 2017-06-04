@@ -70,6 +70,31 @@ Has a "retry" method which takes the following arguments:
 
 	* None - Retry same args, same function, no timeout
 
+
+StoppableThread
+---------------
+
+StoppableThread is a subclass of threading.Thread, which supports stopping the thread (supports both python2 and python3). It will work to stop even in C code.
+
+The way it works is that you pass it an exception, and it raises it via the cpython api (So the next time a "python" function is called from C api, or the next line is processed in python code, the exception is raised).
+
+It is recommended that you create an exception that extends BaseException instead of Exception, otherwise code like this will never stop:
+
+	while True:
+
+		try:
+
+			doSomething()
+
+		except Exception as e:
+
+			continue
+
+
+If you can't avoid such code (third-party lib?) you can set the "repeatEvery" to a very very low number (like .00001 ), so hopefully it will raise, go to the except clause, and then raise again before "continue" is hit.
+
+
+
 Example
 -------
 So, for esxample, if you have a function "doit('arg1', 'arg2')" that you want to limit to running for 5 seconds, with func_timeout you can call it like this:
