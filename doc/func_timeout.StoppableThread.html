@@ -183,6 +183,13 @@ initial&nbsp;name&nbsp;is&nbsp;set&nbsp;by&nbsp;the&nbsp;constructor.</tt></dd>
 <dd ><a href="builtins.html#object" >builtins.object</a></dd>
 </dl>
 <hr />
+Methods defined here:<br />
+<dl ><dt ><a name="StoppableThread-stop" ><strong >stop</strong></a>(self, exception)</dt><dd ><tt >Stops&nbsp;the&nbsp;thread&nbsp;by&nbsp;raising&nbsp;a&nbsp;given&nbsp;exception.<br />
+&nbsp;<br />
+@param&nbsp;exception&nbsp;&lt;Exception&gt;&nbsp;-&nbsp;Exception&nbsp;to&nbsp;throw.&nbsp;Likely,&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;something<br />
+&nbsp;&nbsp;that&nbsp;inherits&nbsp;from&nbsp;BaseException&nbsp;(so&nbsp;except&nbsp;Exception&nbsp;as&nbsp;e:&nbsp;continue;&nbsp;isn't&nbsp;a&nbsp;problem)</tt></dd></dl>
+
+<hr />
 Methods inherited from <a href="threading.html#Thread" >threading.Thread</a>:<br />
 <dl ><dt ><a name="StoppableThread-__init__" ><strong >__init__</strong></a>(self, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None)</dt><dd ><tt >This&nbsp;constructor&nbsp;should&nbsp;always&nbsp;be&nbsp;called&nbsp;with&nbsp;keyword&nbsp;arguments.&nbsp;Arguments&nbsp;are:<br />
 &nbsp;<br />
