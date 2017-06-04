@@ -1,6 +1,9 @@
 * 4.2.0 - Jun 4 2017
 - Add "stop" method to StoppableThread (same as previous _stopThread method -
 but with a 'public' name)
+- Document StoppableThread a lot more
+- Add "raiseEvery" to StoppableThread.stop to control the "repeatEvery" arg to
+JoinThread (how often after the first raise the exception is retried)
 
 * 4.1.0 - May 24 2017
 
