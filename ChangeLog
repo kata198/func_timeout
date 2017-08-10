@@ -1,3 +1,10 @@
+* 4.3.0 - Aug 10 2017
+
+- Ensure that functions wrapped with @func_set_timeout do not lose meta
+information (such as name, docstrings, etc.). Special thanks to belongwqz on
+github for noting the issue and suggesting functools.wraps
+
+
 * 4.2.0 - Jun 4 2017
 - Add "stop" method to StoppableThread (same as previous _stopThread method -
 but with a 'public' name)
