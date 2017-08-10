@@ -25,6 +25,8 @@ except SyntaxError:
 except ImportError:
     from .py2_raise import raise_exception
 
+from functools import wraps
+
 __all__ = ('func_timeout', 'func_set_timeout')
 
 
@@ -180,7 +182,7 @@ def func_set_timeout(timeout, allowOverride=False):
         # Only defaultTimeout provided. Simple function wrapper
         def _function_decorator(func):
 
-            return lambda *args, **kwargs : func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
+            return wraps(func)(lambda *args, **kwargs : func_timeout(defaultTimeout, func, args=args, kwargs=kwargs))
 
 #            def _function_wrapper(*args, **kwargs):
 #                return func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
@@ -198,7 +200,7 @@ def func_set_timeout(timeout, allowOverride=False):
 
                 return func_timeout(useTimeout, func, args=args, kwargs=kwargs)
 
-            return _function_wrapper
+            return wraps(func)(_function_wrapper)
         return _function_decorator
 
 
@@ -217,7 +219,7 @@ def func_set_timeout(timeout, allowOverride=False):
 
                 return func_timeout(useTimeout, func, args=args, kwargs=kwargs)
 
-            return _function_wrapper
+            return wraps(func)(_function_wrapper)
         return _function_decorator
 
     # Cannot override, and calculate timeout function
@@ -227,7 +229,7 @@ def func_set_timeout(timeout, allowOverride=False):
 
             return func_timeout(useTimeout, func, args=args, kwargs=kwargs)
 
-        return _function_wrapper
+        return wraps(func)(_function_wrapper)
     return _function_decorator
 
 

@@ -394,6 +394,45 @@ class TestDecorator(object):
 
                 
         assert threadsCleanedUp , 'Expected other threads to get cleaned up after gc collection'
+    
+    def test_nameRetained(self):
+        
+        # Case of just timeout
+        @func_set_timeout(2, allowOverride=False)
+        def hello():
+            pass
+
+        assert hello.__name__ == 'hello'
+
+        del hello
+        
+        def getTimeoutFunc():
+            return 2
+
+        # Timeout is function
+        @func_set_timeout(getTimeoutFunc, allowOverride=False)
+        def hello2():
+            pass
+
+        assert hello2.__name__ == 'hello2'
+
+        del hello2
+
+        # Now the same with allowOverride=True
+
+        @func_set_timeout(2, allowOverride=True)
+        def hello3():
+            pass
+
+        assert hello3.__name__ == 'hello3'
+
+        del hello3
+
+        @func_set_timeout(getTimeoutFunc, allowOverride=True)
+        def hello4():
+            pass
+
+        assert hello4.__name__ == 'hello4'
 
 
 if __name__ == '__main__':
