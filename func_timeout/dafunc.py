@@ -18,6 +18,8 @@ import sys
 from .exceptions import FunctionTimedOut
 from .StoppableThread import StoppableThread
 
+from functools import wraps
+
 try:
     from .py3_raise import raise_exception
 except SyntaxError:
@@ -179,17 +181,16 @@ def func_set_timeout(timeout, allowOverride=False):
     if not allowOverride and not isTimeoutAFunction:
         # Only defaultTimeout provided. Simple function wrapper
         def _function_decorator(func):
-
-            return lambda *args, **kwargs : func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
-
-#            def _function_wrapper(*args, **kwargs):
-#                return func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
-#            return _function_wrapper
+            @wraps(func)
+            def _function_wrapper(*args, **kwargs):
+                return func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
+            return _function_wrapper
         return _function_decorator
 
     if not isTimeoutAFunction:
         # allowOverride is True and timeout is not a function. Simple conditional on every call
         def _function_decorator(func):
+            @wraps(func)
             def _function_wrapper(*args, **kwargs):
                 if 'forceTimeout' in kwargs:
                     useTimeout = kwargs.pop('forceTimeout')
@@ -209,6 +210,7 @@ def func_set_timeout(timeout, allowOverride=False):
         # Could use a lambda here... but want traceback to highlight the calculate function,
         #  and not the invoked function
         def _function_decorator(func):
+            @wraps(func)
             def _function_wrapper(*args, **kwargs):
                 if 'forceTimeout' in kwargs:
                     useTimeout = kwargs.pop('forceTimeout')
@@ -222,6 +224,7 @@ def func_set_timeout(timeout, allowOverride=False):
 
     # Cannot override, and calculate timeout function
     def _function_decorator(func):
+        @wraps(func)
         def _function_wrapper(*args, **kwargs):
             useTimeout = timeoutFunction(*args, **kwargs)
 
