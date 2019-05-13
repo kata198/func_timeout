@@ -56,8 +56,10 @@ class StoppableThread(threading.Thread):
         '''
             Stops the thread by raising a given exception.
 
-            @param exception <Exception> - Exception to throw. Likely, you want to use something
+            @param exception <Exception type> - Exception to throw. Likely, you want to use something
               that inherits from BaseException (so except Exception as e: continue; isn't a problem)
+
+              This should be a class/type, NOT an instance, i.e.  MyExceptionType   not  MyExceptionType()
         '''
         return self._stopThread(exception, raiseEvery)
 
