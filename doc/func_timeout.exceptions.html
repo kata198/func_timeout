@@ -33,7 +33,9 @@ LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://gith
 <font color="#000000" face="helvetica, arial" ><a name="FunctionTimedOut" >class <strong >FunctionTimedOut</strong></a>(<a href="builtins.html#BaseException" >builtins.BaseException</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8" ><td rowspan="2" ><tt >&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan="2" ><tt ><a href="#FunctionTimedOut" >FunctionTimedOut</a>&nbsp;-&nbsp;Exception&nbsp;raised&nbsp;when&nbsp;a&nbsp;function&nbsp;times&nbsp;out<br />
+<td colspan="2" ><tt ><a href="#FunctionTimedOut" >FunctionTimedOut</a>(msg='',&nbsp;timedOutAfter=None,&nbsp;timedOutFunction=None,&nbsp;timedOutArgs=None,&nbsp;timedOutKwargs=None)<br />
+&nbsp;<br />
+<a href="#FunctionTimedOut" >FunctionTimedOut</a>&nbsp;-&nbsp;Exception&nbsp;raised&nbsp;when&nbsp;a&nbsp;function&nbsp;times&nbsp;out<br />
 &nbsp;<br />
 @property&nbsp;timedOutAfter&nbsp;-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;before&nbsp;timeout&nbsp;was&nbsp;triggered<br />
 &nbsp;<br />
@@ -78,9 +80,7 @@ Methods inherited from <a href="builtins.html#BaseException" >builtins.BaseExcep
 
 <dl ><dt ><a name="FunctionTimedOut-__getattribute__" ><strong >__getattribute__</strong></a>(self, name, /)</dt><dd ><tt >Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
 
-<dl ><dt ><a name="FunctionTimedOut-__new__" ><strong >__new__</strong></a>(*args, **kwargs)<font color="#909090" ><font face="helvetica, arial" > from <a href="builtins.html#type" >builtins.type</a></font></font></dt><dd ><tt >Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
-
-<dl ><dt ><a name="FunctionTimedOut-__reduce__" ><strong >__reduce__</strong></a>(...)</dt><dd ><tt >helper&nbsp;for&nbsp;pickle</tt></dd></dl>
+<dl ><dt ><a name="FunctionTimedOut-__reduce__" ><strong >__reduce__</strong></a>(...)</dt><dd ><tt >Helper&nbsp;for&nbsp;pickle.</tt></dd></dl>
 
 <dl ><dt ><a name="FunctionTimedOut-__repr__" ><strong >__repr__</strong></a>(self, /)</dt><dd ><tt >Return&nbsp;repr(self).</tt></dd></dl>
 
@@ -92,6 +92,10 @@ Methods inherited from <a href="builtins.html#BaseException" >builtins.BaseExcep
 
 <dl ><dt ><a name="FunctionTimedOut-with_traceback" ><strong >with_traceback</strong></a>(...)</dt><dd ><tt >Exception.<a href="#FunctionTimedOut-with_traceback" >with_traceback</a>(tb)&nbsp;--<br />
 set&nbsp;self.<strong >__traceback__</strong>&nbsp;to&nbsp;tb&nbsp;and&nbsp;return&nbsp;self.</tt></dd></dl>
+
+<hr />
+Static methods inherited from <a href="builtins.html#BaseException" >builtins.BaseException</a>:<br />
+<dl ><dt ><a name="FunctionTimedOut-__new__" ><strong >__new__</strong></a>(*args, **kwargs)<font color="#909090" ><font face="helvetica, arial" > from <a href="builtins.html#type" >builtins.type</a></font></font></dt><dd ><tt >Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <hr />
 Data descriptors inherited from <a href="builtins.html#BaseException" >builtins.BaseException</a>:<br />
