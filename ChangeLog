@@ -1,3 +1,8 @@
+* 4.3.1 - May 13 2019
+
+- Update docs, update README, note that this still works with Python 3.7
+
+
 * 4.3.0 - Aug 10 2017
 
 - Ensure that functions wrapped with @func_set_timeout do not lose meta
