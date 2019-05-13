@@ -52,14 +52,30 @@ class StoppableThread(threading.Thread):
         joinThread.start()
         joinThread._stderr = self._stderr
 
+
     def stop(self, exception, raiseEvery=2.0):
         '''
             Stops the thread by raising a given exception.
 
             @param exception <Exception type> - Exception to throw. Likely, you want to use something
+
               that inherits from BaseException (so except Exception as e: continue; isn't a problem)
 
               This should be a class/type, NOT an instance, i.e.  MyExceptionType   not  MyExceptionType()
+
+
+            @param raiseEvery <float> Default 2.0 - We will keep raising this exception every #raiseEvery seconds,
+
+                until the thread terminates.
+
+                If your code traps a specific exception type, this will allow you #raiseEvery seconds to cleanup before exit.
+
+                If you're calling third-party code you can't control, which catches BaseException, set this to a low number
+
+                  to break out of their exception handler.
+
+
+             @return <None>
         '''
         return self._stopThread(exception, raiseEvery)
 
