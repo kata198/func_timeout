@@ -174,7 +174,7 @@ This will force 'Server is shutting down' as the message held by this exception.
 Pydoc
 =====
 
-Find pydoc at https://pythonhosted.org/func_timeout
+Find the latest pydoc at http://htmlpreview.github.io/?https://github.com/kata198/func_timeout/blob/master/doc/func_timeout.html?vers=4.3.2 .
 
 
 Support
