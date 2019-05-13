@@ -119,24 +119,55 @@ The way it works is that you pass it an exception, and it raises it via the cpyt
 Using StoppableThread
 ---------------------
 
-Your thread should extend func\_timeout.StoppableThread\.StoppableThread and implement the "run" method, same as a normal thread.
+You can use StoppableThread one of two ways:
 
-It is recommended that you create an exception that extends BaseException instead of Exception, otherwise code like this will never stop:
-
-	while True:
-
-		try:
-
-			doSomething()
-
-		except Exception as e:
-
-			continue
-
-If you can't avoid such code (third-party lib?) you can set the "repeatEvery" to a very very low number (like .00001 ), so hopefully it will raise, go to the except clause, and then raise again before "continue" is hit.
+**As a Parent Class**
 
 
-Stopping A Thread
+Your thread can extend func\_timeout.StoppableThread\.StoppableThread and implement the "run" method, same as a normal thread.
+
+
+	from func\_timeout.StoppableThread import StoppableThread
+
+	class MyThread(StoppableThread):
+
+		def run(self):
+			
+			# Code here
+
+			return
+
+
+Then, you can create and start this thread like:
+
+	myThread = MyThread()
+
+	# Uncomment next line to start thread in "daemon mode" \-\- i.e. will terminate/join automatically upon main thread exit
+
+	#myThread.daemon = True
+
+	myThread.start()
+
+
+Then, at any time during the thread's execution, you can call \.stop( StopExceptionType ) to stop it ( more in "Stopping a Thread" below
+
+**Direct Thread To Execute A Function**
+
+Alternatively, you can instantiate StoppableThread directly and pass the "target", "args", and "kwargs" arguments to the constructor
+
+	myThread = StoppableThread( target=myFunction, args=('ordered', 'args', 'here'), kwargs={ 'keyword args' : 'here' } )
+
+	# Uncomment next line to start thread in "daemon mode" \-\- i.e. will terminate/join automatically upon main thread exit
+
+	#myThread.daemon = True
+
+	myThread.start()
+
+
+This will allow you to call functions in stoppable threads, for example handlers in an event loop, which can be stopped later via the \.stop() method.
+
+
+Stopping a Thread
 -----------------
 
 
@@ -177,6 +208,24 @@ The "exception" param must be a type, and it must be instantiable with no argume
 Consider using a custom exception type which extends BaseException, which you can then use to do basic cleanup ( flush any open files, etc. ).
 
 The exception type you pass will be raised every #raiseEvery seconds in the context of that stoppable thread. You can tweak this value to give yourself more time for cleanups, or you can shrink it down to break out of empty exception handlers  ( try/except with bare except ).
+
+
+**Notes on Exception Type**
+
+It is recommended that you create an exception that extends BaseException instead of Exception, otherwise code like this will never stop:
+
+	while True:
+
+		try:
+
+			doSomething()
+
+		except Exception as e:
+
+			continue
+
+If you can't avoid such code (third-party lib?) you can set the "repeatEvery" to a very very low number (like .00001 ), so hopefully it will raise, go to the except clause, and then raise again before "continue" is hit.
+
 
 
 You may want to consider using singleton types with fixed error messages, so that tracebacks, etc. log that the call timed out.
