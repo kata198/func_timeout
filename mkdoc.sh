@@ -1,9 +1,13 @@
 #!/bin/bash
 
+# Ensure we are in the project root directory
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+
+shopt -s nullglob
 ALL_MODS="$(echo func_timeout/*.py | tr ' ' '\n' | sed -e 's|/|.|g' -e 's|.py$||g' -e 's|.__init__$||g' | tr '\n' ' ')"
 
 pydoc -w ${ALL_MODS}
-mv *.html doc/
+mv func_timeout*.html doc/
 pushd doc >/dev/null 2>&1
 rm -f index.html
 
