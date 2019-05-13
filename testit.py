@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+'''
+    testit.py - Example code for ad-hoc function timeouts.
+
+        Newer tests for all features found in "tests" directory.
+'''
 
 from func_timeout import func_timeout, FunctionTimedOut
 import time
@@ -23,6 +28,7 @@ if __name__ == '__main__':
         myException = e
         pass
 
+    print ( "\nRetrying with longer timeout, should get 16+17=33:" )
     if myException is not None:
         print ( "\nGot: %s\n" %( str(myException.retry(2.5)), ) )
     else:
