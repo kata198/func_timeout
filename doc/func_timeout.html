@@ -6,8 +6,8 @@
 <table width="100%" cellspacing="0" cellpadding="2" border="0" summary="heading" >
 <tr bgcolor="#7799ee" >
 <td valign="bottom" >&nbsp;<br />
-<font color="#ffffff" face="helvetica, arial" >&nbsp;<br /><big ><big ><strong >func_timeout</strong></big></big> (version 4.3.0)</font></td><td align="right" valign="bottom" ><font color="#ffffff" face="helvetica, arial" ><a href="func_timeout.html" >index</a></font></td></tr></table>
-    <p ><tt >Copyright&nbsp;(c)&nbsp;2016,&nbsp;2017&nbsp;Tim&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved.<br />
+<font color="#ffffff" face="helvetica, arial" >&nbsp;<br /><big ><big ><strong >func_timeout</strong></big></big> (version 4.3.1)</font></td><td align="right" valign="bottom" ><font color="#ffffff" face="helvetica, arial" ><a href="func_timeout.html" >index</a></font></td></tr></table>
+    <p ><tt >Copyright&nbsp;(c)&nbsp;2016,&nbsp;2017,&nbsp;2019&nbsp;Tim&nbsp;Savannah&nbsp;All&nbsp;Rights&nbsp;Reserved.<br />
 &nbsp;<br />
 Licensed&nbsp;under&nbsp;the&nbsp;Lesser&nbsp;GNU&nbsp;Public&nbsp;License&nbsp;Version&nbsp;3,&nbsp;LGPLv3.&nbsp;You&nbsp;should&nbsp;have&nbsp;recieved&nbsp;a&nbsp;copy&nbsp;of&nbsp;this&nbsp;with&nbsp;the&nbsp;source&nbsp;distribution&nbsp;as<br />
 LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://github.com/kata198/func_timeout/LICENSE</tt></p>
@@ -80,7 +80,7 @@ Methods defined here:<br />
 <dl ><dt ><a name="FunctionTimedOut-retry" ><strong >retry</strong></a>(self, timeout='RETRY_SAME_TIMEOUT')</dt><dd ><tt >retry&nbsp;-&nbsp;Retry&nbsp;the&nbsp;timed-out&nbsp;function&nbsp;with&nbsp;same&nbsp;arguments.<br />
 &nbsp;<br />
 @param&nbsp;timeout&nbsp;&lt;float/RETRY_SAME_TIMEOUT/None&gt;&nbsp;Default&nbsp;RETRY_SAME_TIMEOUT<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;RETRY_SAME_TIMEOUT&nbsp;:&nbsp;Will&nbsp;retry&nbsp;the&nbsp;function&nbsp;same&nbsp;args,&nbsp;same&nbsp;timeout<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;float/int&nbsp;:&nbsp;Will&nbsp;retry&nbsp;the&nbsp;function&nbsp;same&nbsp;args&nbsp;with&nbsp;provided&nbsp;timeout<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;None&nbsp;:&nbsp;Will&nbsp;retry&nbsp;function&nbsp;same&nbsp;args&nbsp;no&nbsp;timeout<br />
@@ -313,34 +313,34 @@ initial&nbsp;name&nbsp;is&nbsp;set&nbsp;by&nbsp;the&nbsp;constructor.</tt></dd>
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;#timeout&nbsp;is&nbsp;provided&nbsp;as&nbsp;a&nbsp;lambda/function,&nbsp;it&nbsp;will&nbsp;be&nbsp;called<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;prior&nbsp;to&nbsp;each&nbsp;invocation&nbsp;of&nbsp;the&nbsp;decorated&nbsp;function&nbsp;to&nbsp;calculate&nbsp;the&nbsp;timeout&nbsp;to&nbsp;be&nbsp;used<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;that&nbsp;call,&nbsp;based&nbsp;on&nbsp;the&nbsp;arguments&nbsp;passed&nbsp;to&nbsp;the&nbsp;decorated&nbsp;function.<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;example,&nbsp;you&nbsp;may&nbsp;have&nbsp;a&nbsp;"processData"&nbsp;function&nbsp;whose&nbsp;execution&nbsp;time<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depends&nbsp;on&nbsp;the&nbsp;number&nbsp;of&nbsp;"data"&nbsp;elements,&nbsp;so&nbsp;you&nbsp;may&nbsp;want&nbsp;a&nbsp;million&nbsp;elements&nbsp;to&nbsp;have&nbsp;a&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;depends&nbsp;on&nbsp;the&nbsp;number&nbsp;of&nbsp;"data"&nbsp;elements,&nbsp;so&nbsp;you&nbsp;may&nbsp;want&nbsp;a&nbsp;million&nbsp;elements&nbsp;to&nbsp;have&nbsp;a<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;much&nbsp;higher&nbsp;timeout&nbsp;than&nbsp;seven&nbsp;elements.)<br />
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;#allowOverride&nbsp;is&nbsp;True&nbsp;AND&nbsp;a&nbsp;kwarg&nbsp;of&nbsp;"forceTimeout"&nbsp;is&nbsp;passed&nbsp;to&nbsp;the&nbsp;wrapped&nbsp;function,&nbsp;that&nbsp;timeout<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;that&nbsp;single&nbsp;call.<br />
 &nbsp;<br />
-@param&nbsp;timeout&nbsp;&lt;float&nbsp;OR&nbsp;lambda/function&gt;&nbsp;-&nbsp;<br />
+@param&nbsp;timeout&nbsp;&lt;float&nbsp;OR&nbsp;lambda/function&gt;&nbsp;-<br />
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;**If&nbsp;float:**<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default&nbsp;number&nbsp;of&nbsp;seconds&nbsp;max&nbsp;to&nbsp;allow&nbsp;function&nbsp;to&nbsp;execute<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;throwing&nbsp;<a href="#FunctionTimedOut" >FunctionTimedOut</a><br />
-&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;**If&nbsp;lambda/function:<br />
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;a&nbsp;function/lambda&nbsp;is&nbsp;provided,&nbsp;it&nbsp;will&nbsp;be&nbsp;called&nbsp;for&nbsp;every<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invocation&nbsp;of&nbsp;the&nbsp;decorated&nbsp;function&nbsp;(unless&nbsp;#allowOverride=True&nbsp;and&nbsp;"forceTimeout"&nbsp;was&nbsp;passed)&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;invocation&nbsp;of&nbsp;the&nbsp;decorated&nbsp;function&nbsp;(unless&nbsp;#allowOverride=True&nbsp;and&nbsp;"forceTimeout"&nbsp;was&nbsp;passed)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;determine&nbsp;the&nbsp;timeout&nbsp;to&nbsp;use&nbsp;based&nbsp;on&nbsp;the&nbsp;arguments&nbsp;to&nbsp;the&nbsp;decorated&nbsp;function.<br />
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;arguments&nbsp;as&nbsp;passed&nbsp;into&nbsp;the&nbsp;decorated&nbsp;function&nbsp;will&nbsp;be&nbsp;passed&nbsp;to&nbsp;this&nbsp;function.<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;They&nbsp;either&nbsp;must&nbsp;match&nbsp;exactly&nbsp;to&nbsp;what&nbsp;the&nbsp;decorated&nbsp;function&nbsp;has,&nbsp;OR<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;you&nbsp;prefer&nbsp;to&nbsp;get&nbsp;the&nbsp;*args&nbsp;(list&nbsp;of&nbsp;ordered&nbsp;args)&nbsp;and&nbsp;**kwargs&nbsp;(&nbsp;key&nbsp;:&nbsp;value&nbsp;&nbsp;keyword&nbsp;args&nbsp;form),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;define&nbsp;your&nbsp;calculate&nbsp;function&nbsp;like:<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;calculateTimeout(*args,&nbsp;**kwargs):<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or&nbsp;lambda&nbsp;like:<br />
 &nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calculateTimeout&nbsp;=&nbsp;lambda&nbsp;*args,&nbsp;**kwargs&nbsp;:&nbsp;...<br />
@@ -383,5 +383,5 @@ to&nbsp;return&nbsp;cleanly,&nbsp;but&nbsp;in&nbsp;most&nbsp;cases&nbsp;it&nbsp;
     
 <tr ><td bgcolor="#55aa55" ><tt >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td >&nbsp;</td>
 <td width="100%" ><strong >__all__</strong> = ('func_timeout', 'func_set_timeout', 'FunctionTimedOut', 'StoppableThread')<br />
-<strong >__version_tuple__</strong> = (4, 3, 0)</td></tr></table>
+<strong >__version_tuple__</strong> = (4, 3, 1)</td></tr></table>
 </p></p></p></p></body></html>
