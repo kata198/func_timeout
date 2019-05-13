@@ -53,7 +53,7 @@ class FunctionTimedOut(BaseException):
             retry - Retry the timed-out function with same arguments.
 
             @param timeout <float/RETRY_SAME_TIMEOUT/None> Default RETRY_SAME_TIMEOUT
-                
+
                 If RETRY_SAME_TIMEOUT : Will retry the function same args, same timeout
                 If a float/int : Will retry the function same args with provided timeout
                 If None : Will retry function same args no timeout
@@ -62,7 +62,7 @@ class FunctionTimedOut(BaseException):
         '''
         if timeout is None:
             return self.timedOutFunction(*(self.timedOutArgs), **self.timedOutKwargs)
-        
+
         from .dafunc import func_timeout
 
         if timeout == RETRY_SAME_TIMEOUT:

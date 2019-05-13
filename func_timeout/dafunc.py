@@ -74,7 +74,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
             if isStopped is False:
                 # Assemble the alternate traceback, excluding this function
                 #  from the trace (by going to next frame)
-                # Pytohn3 reads native from __traceback__, 
+                # Pytohn3 reads native from __traceback__,
                 # python2 has a different form for "raise"
                 e.__traceback__ = exc_info[2].tb_next
                 exception.append( e )
@@ -120,34 +120,34 @@ def func_set_timeout(timeout, allowOverride=False):
             If #timeout is provided as a lambda/function, it will be called
               prior to each invocation of the decorated function to calculate the timeout to be used
               for that call, based on the arguments passed to the decorated function.
-              
+
               For example, you may have a "processData" function whose execution time
-              depends on the number of "data" elements, so you may want a million elements to have a 
+              depends on the number of "data" elements, so you may want a million elements to have a
               much higher timeout than seven elements.)
 
             If #allowOverride is True AND a kwarg of "forceTimeout" is passed to the wrapped function, that timeout
              will be used for that single call.
 
-        @param timeout <float OR lambda/function> - 
-        
+        @param timeout <float OR lambda/function> -
+
             **If float:**
                 Default number of seconds max to allow function to execute
                   before throwing FunctionTimedOut
-            
+
             **If lambda/function:
 
                  If a function/lambda is provided, it will be called for every
-                  invocation of the decorated function (unless #allowOverride=True and "forceTimeout" was passed) 
+                  invocation of the decorated function (unless #allowOverride=True and "forceTimeout" was passed)
                   to determine the timeout to use based on the arguments to the decorated function.
 
                     The arguments as passed into the decorated function will be passed to this function.
                      They either must match exactly to what the decorated function has, OR
                       if you prefer to get the *args (list of ordered args) and **kwargs ( key : value  keyword args form),
                       define your calculate function like:
-                        
+
                         def calculateTimeout(*args, **kwargs):
                             ...
-                    
+
                       or lambda like:
 
                         calculateTimeout = lambda *args, **kwargs : ...
