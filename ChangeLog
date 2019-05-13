@@ -1,6 +1,8 @@
-* 4.3.1 - May 13 2019
+* 4.3.2 - May 13 2019
 
 - Update docs, update README, note that this still works with Python 3.7
+
+- Update link to pydocs to be on githubpreview, as python hosted is broke right now.
 
 
 * 4.3.0 - Aug 10 2017
