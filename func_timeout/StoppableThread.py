@@ -38,7 +38,7 @@ class StoppableThread(threading.Thread):
         '''
             _stopThread - @see StoppableThread.stop
         '''
-        if self.isAlive() is False:
+        if self.is_alive() is False:
             return True
 
         self._stderr = open(os.devnull, 'w')
@@ -120,7 +120,7 @@ class JoinThread(threading.Thread):
             # If py2, call this first to start thread termination cleanly.
             #   Python3 does not need such ( nor does it provide.. )
             self.otherThread._Thread__stop()
-        while self.otherThread.isAlive():
+        while self.otherThread.is_alive():
             # We loop raising exception incase it's caught hopefully this breaks us far out.
             ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(self.otherThread.ident), ctypes.py_object(self.exception))
             self.otherThread.join(self.repeatEvery)
