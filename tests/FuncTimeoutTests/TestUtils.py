@@ -160,6 +160,7 @@ def compareTimes(timeEnd, timeStart, cmpTime, roundTo=None, deltaFixed=.05, delt
         @param roundTo <None/int> - Number of digits to round-off to
 
         @param deltaFixed <float/None> Default .05, If provided and if difference is within this much, the two values are considered equal
+
         @param deltaPct   <float/None> Default None, if provided and if difference is within this much, the two values are considered equal. 1 = 100%, .5 = 50%
 
         Example: if trying to determine if function ran for 2 seconds with an error of .05 seconds,
