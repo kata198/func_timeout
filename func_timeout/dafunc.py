@@ -86,7 +86,7 @@ def func_timeout(timeout, func, args=(), kwargs=None):
     thread.join(timeout)
 
     stopException = None
-    if thread.isAlive():
+    if thread.is_alive():
         isStopped = True
 
         class FunctionTimedOutTempType(FunctionTimedOut):
