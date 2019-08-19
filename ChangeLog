@@ -1,3 +1,13 @@
+
+* 4.3.5 - Aug 19 2019
+
+- Increase times in unit tests to ensure passing on slow systems
+
+- Allow instantiating  FunctionTimedOut exception without arguments ( will replace function name with "Unknown Function" and timedOutAfter with "Unknown" when absent)
+
+- Update runTests.py from latest GoodTests distrib, 3.0.5 from 2.1.1
+
+
 * 4.3.4 - Aug 19 2019
 
 - Merge patch by Rafal Florczak to use threading.Thread.is_alive vs now deprecated threading.Thread.isAlive
