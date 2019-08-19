@@ -53,7 +53,19 @@ LICENSE,&nbsp;otherwise&nbsp;it&nbsp;is&nbsp;available&nbsp;at&nbsp;https://gith
 </dl>
 <hr />
 Methods defined here:<br />
-<dl ><dt ><a name="FunctionTimedOut-__init__" ><strong >__init__</strong></a>(self, msg='', timedOutAfter=None, timedOutFunction=None, timedOutArgs=None, timedOutKwargs=None)</dt><dd ><tt >Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl ><dt ><a name="FunctionTimedOut-__init__" ><strong >__init__</strong></a>(self, msg='', timedOutAfter=None, timedOutFunction=None, timedOutArgs=None, timedOutKwargs=None)</dt><dd ><tt >__init__&nbsp;-&nbsp;Create&nbsp;this&nbsp;exception&nbsp;type.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;not&nbsp;need&nbsp;to&nbsp;do&nbsp;this&nbsp;outside&nbsp;of&nbsp;testing,&nbsp;it&nbsp;will&nbsp;be&nbsp;created&nbsp;by&nbsp;the&nbsp;func_timeout&nbsp;API<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;msg&nbsp;&lt;str&gt;&nbsp;-&nbsp;A&nbsp;predefined&nbsp;message,&nbsp;otherwise&nbsp;we&nbsp;will&nbsp;attempt&nbsp;to&nbsp;generate&nbsp;one&nbsp;from&nbsp;the&nbsp;other&nbsp;arguments.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timedOutAfter&nbsp;&lt;None/float&gt;&nbsp;-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;before&nbsp;timing-out.&nbsp;Filled-in&nbsp;by&nbsp;API,&nbsp;None&nbsp;will&nbsp;produce&nbsp;"Unknown"<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timedOutFunction&nbsp;&lt;None/function&gt;&nbsp;-&nbsp;Reference&nbsp;to&nbsp;the&nbsp;function&nbsp;that&nbsp;timed-out.&nbsp;Filled-in&nbsp;by&nbsp;API."&nbsp;None&nbsp;will&nbsp;produce&nbsp;"Unknown&nbsp;Function"<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timedOutArgs&nbsp;&lt;None/tuple/list&gt;&nbsp;-&nbsp;List&nbsp;of&nbsp;fixed-order&nbsp;arguments&nbsp;(&nbsp;*args&nbsp;),&nbsp;or&nbsp;None&nbsp;for&nbsp;no&nbsp;args.<br />
+&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timedOutKwargs&nbsp;&lt;None/dict&gt;&nbsp;-&nbsp;Dict&nbsp;of&nbsp;keyword&nbsp;arg&nbsp;(&nbsp;**kwargs&nbsp;)&nbsp;names&nbsp;to&nbsp;values,&nbsp;or&nbsp;None&nbsp;for&nbsp;no&nbsp;kwargs.</tt></dd></dl>
 
 <dl ><dt ><a name="FunctionTimedOut-getMsg" ><strong >getMsg</strong></a>(self)</dt><dd ><tt >getMsg&nbsp;-&nbsp;Generate&nbsp;a&nbsp;default&nbsp;message&nbsp;based&nbsp;on&nbsp;parameters&nbsp;to&nbsp;<a href="#FunctionTimedOut" >FunctionTimedOut</a>&nbsp;exception'<br />
 &nbsp;<br />
