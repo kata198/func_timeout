@@ -12,7 +12,62 @@
 # NOTE: Since version 1.2.3, you can also import this (like from a graphical application) and call the "main()" function.
 #  All of the following globals are the defaults,  but can be overridden when calling main() (params have the same name as the globals).
 
-import imp
+# Assign a local function, "find_mod" to the interface to search
+#  PYTHONPATH for importable module
+try:
+    # imp.find_module has been deprecated as of python 3.7, so
+    #   prefer some alternate/newer interfaces first.
+    import importlib
+
+    try:
+        # If we have the newest and therefore least-deprecated
+        #   way, use it.
+        _findModSpec = importlib.util.find_spec
+        def find_mod(modName):
+            '''
+                find_mod - Find a module by name.
+
+                  Similar to import #modName but only finds importable module,
+                   does not actually import.
+
+                 @raises ImportError on failure
+            '''
+            modSpec = _findModSpec(modName)
+            if not modSpec:
+                # imp.find_module raises import error if cannot find,
+                #   but find_spec just returns None
+                # So simulate the ImportError for common interface
+                raise ImportError('No module named %s' %(modName, ))
+
+            return modSpec
+
+    except AttributeError:
+        # We have importlib, but don't have importlib.util.find_spec
+
+        # We could use importlib.import_module which is present in
+        #  python 2.7, but that changes behaviour by actually
+        #  importing (and thus additionally checking syntax/other).
+        #
+        # So just fall back to the old imp.find_module in this case
+
+        try:
+            # Clean up namespace
+            del importlib
+        except:
+            pass
+        # Fall back to imp.find_module implementation below
+        raise ImportError('importlib but no importlib.util')
+        #find_mod = lambda modName : importlib.import_module(modName)
+
+except:
+    # importlib is not present or has an unknown/dated interface,
+    #   so fallback to the deprecated but oldest form
+    import imp
+
+    # Use a lambda to ensure only one arg is passed as that is
+    #   our standard interface
+    find_mod = lambda modName : imp.find_module(modName)
+
 import os
 
 import subprocess
@@ -32,8 +87,8 @@ ALLOW_SITE_INSTALL = False
 # This is the test directory that should contain all your tests. This should be a directory in your "tests" folder
 MY_TEST_DIRECTORY = 'FuncTimeoutTests'
 
-__version__ = '2.1.1'
-__version_tuple__ = (2, 1, 1)
+__version__ = '3.0.5'
+__version_tuple__ = (3, 0, 5)
 
 def findGoodTests():
     '''
@@ -65,8 +120,83 @@ def findGoodTests():
         "success" : success 
     }
 
+def findExecutable(execName):
+    '''
+        findExecutable - Search PATH for an executable
+
+        @return <dict> {
+            'path' <str> -> Path to executable (if found, see "success")
+            'success' <bool> -> True/False if we successfully found requested executable
+        }
+    '''
+
+    pathSplit = os.environ['PATH'].split(':')
+    if '.' not in pathSplit:
+        pathSplit = ['.'] + pathSplit
+        os.environ['PATH'] = ':'.join(pathSplit)
+
+    result = ''
+    success = False
+    for path in pathSplit:
+        if path.endswith(os.sep):
+            path = path[:-1]
+        guess = path + os.sep + execName
+        if os.path.exists(guess):
+            success = True
+            result = guess
+            break
+
+    return {
+        "path"    : result,
+        "success" : success 
+    }
+
+def findGoodTests():
+    return findExecutable('GoodTests.py')
+
+
 def try_pip_install():
-    pipe = subprocess.Popen('pip install GoodTests', shell=True)
+    '''
+        try to pip install GoodTests.py
+
+        First, try via pip module.
+
+        If that fails, try to locate pip by dirname(current python executable) + os.sep + pip
+        If that does not exist, scan PATH for pip
+
+        If found a valid pip executable, invoke it to install GoodTests
+        otherwise, fail.
+    '''
+
+    didImport = False
+    try:
+        import pip
+        didImport = True
+    except:
+        pass
+
+    if didImport is True:
+        print ( "Found pip as module=pip")
+        res = pip.main(['install', 'GoodTests'])
+        if res == 0:
+            return 0
+        sys.stderr.write('Failed to install GoodTests via pip module. Falling back to pip executable...\n\n')
+
+    pipPath = os.path.dirname(sys.executable) + os.sep + 'pip'
+    print ( 'Searching for pip at "%s"' %(pipPath, ) )
+    if not os.path.exists(pipPath):
+        print ( '"%s" does not exist. Scanning PATH to locate a usable pip executable' %(pipPath, ))
+        pipPath = None
+        searchResults = findExecutable('pip')
+        if not searchResults['success']:
+            sys.stderr.write('Failed to find a usable pip executable in PATH.\n')
+            return 1 # Failed to locate a usable pip
+
+        pipPath = searchResults['path']
+
+    print ( 'Found pip executable at "%s"' %(pipPath, ) )
+    print ( "Executing:  %s %s 'install' 'GoodTests'" %(sys.executable, pipPath) )
+    pipe = subprocess.Popen([sys.executable, pipPath, 'install', 'GoodTests'], shell=False, env=os.environ)
     res = pipe.wait()
     
     return res
@@ -195,7 +325,7 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
     elif dirName == '':
         inCurrentDir = False
         try:
-            imp.find_module(MY_PACKAGE_MODULE)
+            find_mod(MY_PACKAGE_MODULE)
             inCurrentDir = True
         except ImportError:
             # COMPAT WITH PREVIOUS runTests.py: Try plain module in parent directory
@@ -203,7 +333,7 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
             oldSysPath = sys.path[:]
             sys.path = [os.path.realpath(os.getcwd() + os.sep + '..' + os.sep)]
             try:
-                imp.find_module(MY_PACKAGE_MODULE)
+                find_mod(MY_PACKAGE_MODULE)
                 foundIt = True
                 sys.path = oldSysPath
             except ImportError as e:
@@ -234,8 +364,15 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
         if baseName.endswith(('.py', '.pyc', '.pyo')):
             MY_PACKAGE_MODULE = baseName[ : baseName.rindex('.')]
 
-        if e.name != MY_PACKAGE_MODULE:
-            sys.stderr.write('Error while importing %s: %s\n Likely this is another dependency that needs to be installed\nPerhaps run "pip install %s" or install the providing package.\n\n' %(e.name, str(e), e.name))
+        try:
+            eName = e.name
+        except AttributeError as noNameE:
+            # Some platforms python2 does not have this attribute
+            #   so pull it from the message
+            eName = e.message.split()[-1]
+
+        if eName != MY_PACKAGE_MODULE:
+            sys.stderr.write('Error while importing %s: %s\n Likely this is another dependency that needs to be installed\nPerhaps run "pip install %s" or install the providing package.\n\n' %(eName, str(e), eName))
             return 1
         sys.stderr.write('Could not import %s. Either install it or otherwise add to PYTHONPATH\n%s\n' %(MY_PACKAGE_MODULE, str(e)))
         return 1
@@ -253,8 +390,7 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
 
 
     didTerminate = False
-
-    pipe = subprocess.Popen([goodTestsInfo['path']] + additionalArgs + [MY_TEST_DIRECTORY], env=os.environ, shell=False)
+    pipe = subprocess.Popen([sys.executable, goodTestsInfo['path']] + additionalArgs + [MY_TEST_DIRECTORY], env=os.environ, shell=False)
     while True:
         try:
             pipe.wait()
