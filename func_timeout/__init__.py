@@ -6,8 +6,8 @@
 '''
 
 
-__version__ = '4.3.3'
-__version_tuple__ = (4, 3, 3)
+__version__ = '4.3.4'
+__version_tuple__ = (4, 3, 4)
 
 __all__ = ('func_timeout', 'func_set_timeout', 'FunctionTimedOut', 'StoppableThread')
 
