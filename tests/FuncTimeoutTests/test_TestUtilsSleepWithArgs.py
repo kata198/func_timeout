@@ -35,7 +35,7 @@ class TestBasicSleepWithArgs(object):
             raise AssertionError('Expected to have 1 default arg and 2 standard. Tried 3 args')
         endTime = time.time()
 
-        assert compareTimes(endTime, startTime, 2, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(2) to take 2 seconds.'
+        assert compareTimes(endTime, startTime, 2, 2, deltaFixed=.15, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(2) to take 2 seconds.'
 
         try:
             sleepLambda(4, 7, 12)
@@ -54,7 +54,7 @@ class TestBasicSleepWithArgs(object):
         endTime = time.time()
 
         assert result == expectedResult , 'Got wrong result'
-        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(1.75) to take 1.75 seconds.'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.15, deltaPct=None) == 0 , 'Expected getSleepLambdaWithArgs(1.75) to take 1.75 seconds.'
 
         expectedResult = 5 + 13
 
@@ -63,7 +63,7 @@ class TestBasicSleepWithArgs(object):
         endTime = time.time()
 
         assert result == expectedResult , 'Did not get return from sleepFunction'
-        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.1, deltaPct=None) == 0 , 'Expected getSleepLambda(1.75) to take 1.75 seconds.'
+        assert compareTimes(endTime, startTime, 1.75, 2, deltaFixed=.15, deltaPct=None) == 0 , 'Expected getSleepLambda(1.75) to take 1.75 seconds.'
     
 if __name__ == '__main__':
     sys.exit(subprocess.Popen('GoodTests.py -n1 "%s" %s' %(sys.argv[0], ' '.join(['"%s"' %(arg.replace('"', '\\"'), ) for arg in sys.argv[1:]]) ), shell=True).wait())

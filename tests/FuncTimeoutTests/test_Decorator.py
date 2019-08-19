@@ -19,7 +19,7 @@ from func_timeout import func_timeout, FunctionTimedOut, func_set_timeout
 
 from TestUtils import ARG_NO_DEFAULT, getSleepLambda, getSleepLambdaWithArgs, compareTimes
 
-SLEEP_TIME = .5
+SLEEP_TIME = 1.25
 
 def doSleep(a, b):
     time.sleep(a)
@@ -52,7 +52,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception at sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep up to sleep time'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep up to sleep time'
 
         expected = SLEEP_TIME * .8 + 4
         gotException = False
@@ -64,7 +64,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception at 80% sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to only sleep for 80% of sleep time'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to only sleep for 80% of sleep time'
         assert result == expected , 'Got wrong result'
 
     def test_funcSetTimeoutOverride(self):
@@ -85,7 +85,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception at 130% sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * 1.2, None, .1) == 0 , 'Expected to sleep up to 120% of sleep time'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * 1.2, None, deltaFixed=.15) == 0 , 'Expected to sleep up to 120% of sleep time'
 
         @func_set_timeout(SLEEP_TIME, allowOverride=False)
         def doSleepFuncNoOverride(a, b):
@@ -113,7 +113,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with forced 115% sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for SLEEP_TIME'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME'
         assert result == expected , 'Got wrong result'
 
     def test_funcSetTimeCalculate(self):
@@ -145,7 +145,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with calculated 120% timeout on sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for SLEEP_TIME'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME'
         assert result == expected , 'Got wrong result'
 
         
@@ -164,7 +164,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout on sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to sleep for 80% SLEEP_TIME'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to sleep for 80% SLEEP_TIME'
 
         @func_set_timeout(calculateSleepOverArgs, allowOverride=False)
         def doSleepFuncOverArgs(a, b):
@@ -181,7 +181,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with calculated 120% timeout on sleep time using *args'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for SLEEP_TIME using *args'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME using *args'
         assert result == expected , 'Got wrong result'
 
         @func_set_timeout(calculateSleepUnderArgs, allowOverride=False)
@@ -199,7 +199,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout on sleep time using *args'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to sleep for 80% SLEEP_TIME using *args'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to sleep for 80% SLEEP_TIME using *args'
 
 
     def test_funcSetTimeCalculateWithOverride(self):
@@ -231,7 +231,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with calculated 120% timeout on sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for SLEEP_TIME'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME'
         assert result == expected , 'Got wrong result'
 
         expected = SLEEP_TIME + 4
@@ -244,7 +244,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with calculated 120% timeout on sleep time but 150% timeout on override'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for SLEEP_TIME with 150% timeout on override'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME with 150% timeout on override'
         assert result == expected , 'Got wrong result'
 
         
@@ -258,7 +258,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 120% timeout on sleep time but 70% timeout on override'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .7, None, .1) == 0 , 'Expected to sleep for 70% SLEEP_TIME with 70% timeout on override'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .7, None, deltaFixed=.15) == 0 , 'Expected to sleep for 70% SLEEP_TIME with 70% timeout on override'
         
         
         @func_set_timeout(calculateSleepUnder, allowOverride=True)
@@ -276,7 +276,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout on sleep time'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to sleep for 80% SLEEP_TIME'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to sleep for 80% SLEEP_TIME'
 
         expected = SLEEP_TIME + 4
         gotException = False
@@ -288,7 +288,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected not to get exception with calculated 80% timeout on sleep time but 120% timeout on override'
-        assert compareTimes(endTime, startTime, SLEEP_TIME , None, .1) == 0 , 'Expected to sleep for SLEEP_TIME with 120% timeout on override'
+        assert compareTimes(endTime, startTime, SLEEP_TIME , None, deltaFixed=.15) == 0 , 'Expected to sleep for SLEEP_TIME with 120% timeout on override'
 
 
     def test_setFuncTimeoutetry(self):
@@ -322,7 +322,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to sleep for 80% SLEEP_TIME with 80% timeout'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to sleep for 80% SLEEP_TIME with 80% timeout'
 
         gotException = False
         startTime = time.time()
@@ -335,7 +335,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated same 80% timeout on retry'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, .1) == 0 , 'Expected to sleep for 80% SLEEP_TIME with same 80% timeout on retry'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .8, None, deltaFixed=.15) == 0 , 'Expected to sleep for 80% SLEEP_TIME with same 80% timeout on retry'
 
         result = None
         gotException = False
@@ -349,7 +349,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected to get exception with calculated 80% timeout on retry ( None ) [ No timeout ]'
-        assert compareTimes(endTime, startTime, SLEEP_TIME, None, .1) == 0 , 'Expected to sleep for 100% SLEEP_TIME with 80% timeout overriden on retry ( None ) [ No timeout ]'
+        assert compareTimes(endTime, startTime, SLEEP_TIME, None, deltaFixed=.15) == 0 , 'Expected to sleep for 100% SLEEP_TIME with 80% timeout overriden on retry ( None ) [ No timeout ]'
         assert result == expected , 'Got wrong result'
 
 
@@ -365,7 +365,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout overriden by 60% timeout on retry'
-        assert compareTimes(endTime, startTime, SLEEP_TIME * .6, None, .1) == 0 , 'Expected to sleep for 60% SLEEP_TIME with 80% timeout overriden on retry ( SLEEP_TIME * .6 ) [ 60% timeout ]'
+        assert compareTimes(endTime, startTime, SLEEP_TIME * .6, None, deltaFixed=.15) == 0 , 'Expected to sleep for 60% SLEEP_TIME with 80% timeout overriden on retry ( SLEEP_TIME * .6 ) [ 60% timeout ]'
         
         result = None
         gotException = False
@@ -379,7 +379,7 @@ class TestDecorator(object):
         endTime = time.time()
 
         assert not gotException , 'Expected to get exception with calculated 80% timeout overriden by 150% timeout on retry'
-        assert compareTimes(endTime, startTime, SLEEP_TIME , None, .1) == 0 , 'Expected to sleep for 100% SLEEP_TIME with 80% timeout overriden on retry ( SLEEP_TIME * 1.5 ) [ 150% timeout ]'
+        assert compareTimes(endTime, startTime, SLEEP_TIME , None, deltaFixed=.15) == 0 , 'Expected to sleep for 100% SLEEP_TIME with 80% timeout overriden on retry ( SLEEP_TIME * 1.5 ) [ 150% timeout ]'
         assert result == expected
         
         threadsCleanedUp = False
