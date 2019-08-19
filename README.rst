@@ -246,7 +246,7 @@ This will force 'Server is shutting down' as the message held by this exception.
 Pydoc
 =====
 
-Find the latest pydoc at http://htmlpreview.github.io/?https://github.com/kata198/func_timeout/blob/master/doc/func_timeout.html?vers=4.3.3 .
+Find the latest pydoc at http://htmlpreview.github.io/?https://github.com/kata198/func_timeout/blob/master/doc/func_timeout.html?vers=4.3.4 .
 
 
 Support
