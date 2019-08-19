@@ -122,7 +122,7 @@ class TestBasic(object):
                 threadsCleanedUp = True
                 break
 
-                
+
         assert threadsCleanedUp , 'Expected other threads to get cleaned up after gc collection'
 
     def test_exception(self):
@@ -148,10 +148,39 @@ class TestBasic(object):
         assert functionTimedOut.timedOutFunction == sleepFunction , 'Expected timedOutFunction to equal sleepFunction'
         assert functionTimedOut.timedOutArgs == (5, 19) , 'Expected args to equal (5, 19)'
         assert functionTimedOut.timedOutKwargs == {} , 'Expected timedOutKwargs to equal {}'
-        
 
-        
-        
+
+    def test_instantiateExceptionNoArgs(self):
+
+        gotException = False
+
+        try:
+            exc = FunctionTimedOut()
+            msg = str(exc)
+            msg2 = exc.getMsg()
+
+        except Exception as _e:
+            sys.stderr.write('Got unexpected exception in test_instantiateExceptionNoArgs with no arguments. %s  %s\n\n' %(str(type(_e)), str(_e)))
+            gotException = True
+
+        assert gotException is False, 'Expected to be able to create FunctionTimedOut exception without arguments.'
+
+        gotException = False
+
+        try:
+            exc = FunctionTimedOut('test')
+            msg = str(exc)
+            msg2 = str(exc.getMsg())
+
+        except Exception as _e:
+            sys.stderr.write('Got unexpected exception in test_instantiateExceptionNoArgs with fixed message string. %s  %s\n\n' %(str(type(_e)), str(_e)))
+            gotException = True
+
+        assert gotException is False , 'Expected to be able to create a FunctionTimedOut exception with a fixed message.'
+
+        # Other forms (providing the function name) are tested elsewhere.
+
+
 
 if __name__ == '__main__':
     sys.exit(subprocess.Popen('GoodTests.py -n1 "%s" %s' %(sys.argv[0], ' '.join(['"%s"' %(arg.replace('"', '\\"'), ) for arg in sys.argv[1:]]) ), shell=True).wait())

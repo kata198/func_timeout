@@ -25,6 +25,22 @@ class FunctionTimedOut(BaseException):
 
 
     def __init__(self, msg='', timedOutAfter=None, timedOutFunction=None, timedOutArgs=None, timedOutKwargs=None):
+        '''
+            __init__ - Create this exception type.
+
+                You should not need to do this outside of testing, it will be created by the func_timeout API
+
+                    @param msg <str> - A predefined message, otherwise we will attempt to generate one from the other arguments.
+
+                    @param timedOutAfter <None/float> - Number of seconds before timing-out. Filled-in by API, None will produce "Unknown"
+
+                    @param timedOutFunction <None/function> - Reference to the function that timed-out. Filled-in by API." None will produce "Unknown Function"
+
+                    @param timedOutArgs <None/tuple/list> - List of fixed-order arguments ( *args ), or None for no args.
+
+                    @param timedOutKwargs <None/dict> - Dict of keyword arg ( **kwargs ) names to values, or None for no kwargs.
+
+        '''
 
         self.timedOutAfter = timedOutAfter
 
@@ -46,7 +62,18 @@ class FunctionTimedOut(BaseException):
 
             @return <str> - Message
         '''
-        return 'Function %s (args=%s) (kwargs=%s) timed out after %f seconds.\n' %(self.timedOutFunction.__name__, repr(self.timedOutArgs), repr(self.timedOutKwargs), self.timedOutAfter)
+        # Try to gather the function name, if available.
+        # If it is not, default to an "unknown" string to allow default instantiation
+        if self.timedOutFunction is not None:
+            timedOutFuncName = self.timedOutFunction.__name__
+        else:
+            timedOutFuncName = 'Unknown Function'
+        if self.timedOutAfter is not None:
+            timedOutAfterStr = "%f" %(self.timedOutAfter, )
+        else:
+            timedOutAfterStr = "Unknown"
+
+        return 'Function %s (args=%s) (kwargs=%s) timed out after %s seconds.\n' %(timedOutFuncName, repr(self.timedOutArgs), repr(self.timedOutKwargs), timedOutAfterStr)
 
     def retry(self, timeout=RETRY_SAME_TIMEOUT):
         '''
