@@ -31,7 +31,7 @@ This is the function wherein you pass the timeout, the function you want to call
 **Example**
 
 
-So, for esxample, if you have a function "doit('arg1', 'arg2')" that you want to limit to running for 5 seconds, with func\_timeout you can call it like this:
+So, for example, if you have a function "doit('arg1', 'arg2')" that you want to limit to running for 5 seconds, with func\_timeout you can call it like this:
 
 
 	from func_timeout import func_timeout, FunctionTimedOut

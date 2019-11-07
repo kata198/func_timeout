@@ -9,7 +9,7 @@ __all__ = ('FunctionTimedOut', 'RETRY_SAME_TIMEOUT')
 
 RETRY_SAME_TIMEOUT = 'RETRY_SAME_TIMEOUT'
 
-class FunctionTimedOut(BaseException):
+class FunctionTimedOut(TimeoutError):
     '''
         FunctionTimedOut - Exception raised when a function times out
 
@@ -51,7 +51,7 @@ class FunctionTimedOut(BaseException):
         if not msg:
             msg = self.getMsg()
 
-        BaseException.__init__(self, msg)
+        TimeoutError.__init__(self, msg)
 
         self.msg = msg
 
