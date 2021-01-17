@@ -17,19 +17,19 @@ def doit(howmany):
 if __name__ == '__main__':
 
     print ( "Should get return value of 23:" )
-    print ( "\tGot Return: %s\n" %(str(func_timeout(4, doit, args=(6,))),) )
+    print ( f"\tGot Return: {str(func_timeout(4, doit, args=(6,)))}\n" )
 
     print ( "\nShould time out (exception):" )
     myException = None
     try:
-        print ("\tGot Return: %s\n" %(str(func_timeout(1, doit, kwargs={'howmany' : 16})),))
+        print (f"\tGot Return: {str(func_timeout(1, doit, kwargs={'howmany': 16}))}\n")
     except FunctionTimedOut as e:
-        sys.stderr.write('\tGot Exception: %s\n' %(str(e),))
+        sys.stderr.write(f'\tGot Exception: {str(e)}\n')
         myException = e
         pass
 
     print ( "\nRetrying with longer timeout, should get 16+17=33:" )
     if myException is not None:
-        print ( "\nGot: %s\n" %( str(myException.retry(2.5)), ) )
+        print ( f"\nGot: {str(myException.retry(2.5))}\n" )
     else:
         sys.stderr.write('Did not get exception before?\n')

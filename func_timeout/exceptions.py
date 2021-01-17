@@ -69,11 +69,11 @@ class FunctionTimedOut(BaseException):
         else:
             timedOutFuncName = 'Unknown Function'
         if self.timedOutAfter is not None:
-            timedOutAfterStr = "%f" %(self.timedOutAfter, )
+            timedOutAfterStr = f"{self.timedOutAfter:f}"
         else:
             timedOutAfterStr = "Unknown"
 
-        return 'Function %s (args=%s) (kwargs=%s) timed out after %s seconds.\n' %(timedOutFuncName, repr(self.timedOutArgs), repr(self.timedOutKwargs), timedOutAfterStr)
+        return f'Function {timedOutFuncName} (args={repr(self.timedOutArgs)}) (kwargs={repr(self.timedOutKwargs)}) timed out after {timedOutAfterStr} seconds.\n'
 
     def retry(self, timeout=RETRY_SAME_TIMEOUT):
         '''

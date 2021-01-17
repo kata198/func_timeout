@@ -37,7 +37,7 @@ try:
                 # imp.find_module raises import error if cannot find,
                 #   but find_spec just returns None
                 # So simulate the ImportError for common interface
-                raise ImportError('No module named %s' %(modName, ))
+                raise ImportError(f'No module named {modName}')
 
             return modSpec
 
@@ -183,9 +183,9 @@ def try_pip_install():
         sys.stderr.write('Failed to install GoodTests via pip module. Falling back to pip executable...\n\n')
 
     pipPath = os.path.dirname(sys.executable) + os.sep + 'pip'
-    print ( 'Searching for pip at "%s"' %(pipPath, ) )
+    print ( f'Searching for pip at "{pipPath}"' )
     if not os.path.exists(pipPath):
-        print ( '"%s" does not exist. Scanning PATH to locate a usable pip executable' %(pipPath, ))
+        print ( f'"{pipPath}" does not exist. Scanning PATH to locate a usable pip executable')
         pipPath = None
         searchResults = findExecutable('pip')
         if not searchResults['success']:
@@ -194,8 +194,8 @@ def try_pip_install():
 
         pipPath = searchResults['path']
 
-    print ( 'Found pip executable at "%s"' %(pipPath, ) )
-    print ( "Executing:  %s %s 'install' 'GoodTests'" %(sys.executable, pipPath) )
+    print ( f'Found pip executable at "{pipPath}"' )
+    print ( f"Executing:  {sys.executable} {pipPath} 'install' 'GoodTests'" )
     pipe = subprocess.Popen([sys.executable, pipPath, 'install', 'GoodTests'], shell=False, env=os.environ)
     res = pipe.wait()
     
@@ -240,7 +240,7 @@ def download_goodTests(GOODTESTS_URL=None):
         if str != bytes:
             contents = contents.decode('ascii')
     except Exception as e:
-        sys.stderr.write('Failed to download GoodTests.py from "%s"\n%s\n' %(GOODTESTS_URL, str(e)))
+        sys.stderr.write(f'Failed to download GoodTests.py from "{GOODTESTS_URL}"\n{str(e)}\n')
         sys.stderr.write('\nTrying pip.\n')
         res = try_pip_install()
         if res != 0:
@@ -250,7 +250,7 @@ def download_goodTests(GOODTESTS_URL=None):
         with open('GoodTests.py', 'w') as f:
             f.write(contents)
     except Exception as e:
-        sys.stderr.write('Failed to write to GoodTests.py\n%s\n' %(str(e,)))
+        sys.stderr.write(f'Failed to write to GoodTests.py\n{str(e)}\n')
         return 1
     try:
         os.chmod('GoodTests.py', 0o775)
@@ -311,7 +311,7 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
             return downloadRet
         goodTestsInfo = findGoodTests()
         if goodTestsInfo['success'] is False:
-            sys.stderr.write('Could not download or find GoodTests.py. Try to download it yourself using "pip install GoodTests", or wget %s\n' %( GOODTESTS_URL,))
+            sys.stderr.write(f'Could not download or find GoodTests.py. Try to download it yourself using "pip install GoodTests", or wget {GOODTESTS_URL}\n')
             return 1
 
     baseName = os.path.basename(MY_PACKAGE_MODULE)
@@ -339,13 +339,13 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
             except ImportError as e:
                 sys.path = oldSysPath
                 if not ALLOW_SITE_INSTALL:
-                    sys.stderr.write('Cannot find "%s" locally.\n' %(MY_PACKAGE_MODULE,))
+                    sys.stderr.write(f'Cannot find "{MY_PACKAGE_MODULE}" locally.\n')
                     return 2
                 else:
                     try:
                         __import__(baseName)
                     except:
-                        sys.stderr.write('Cannot find "%s" locally or in global python path.\n' %(MY_PACKAGE_MODULE,))
+                        sys.stderr.write(f'Cannot find "{MY_PACKAGE_MODULE}" locally or in global python path.\n')
                         return 2
 
             if foundIt is True:
@@ -372,16 +372,16 @@ def main(thisDir=None, additionalArgs=[], MY_PACKAGE_MODULE=None, ALLOW_SITE_INS
             eName = e.message.split()[-1]
 
         if eName != MY_PACKAGE_MODULE:
-            sys.stderr.write('Error while importing %s: %s\n Likely this is another dependency that needs to be installed\nPerhaps run "pip install %s" or install the providing package.\n\n' %(eName, str(e), eName))
+            sys.stderr.write(f'Error while importing {eName}: {str(e)}\n Likely this is another dependency that needs to be installed\nPerhaps run "pip install {eName}" or install the providing package.\n\n')
             return 1
-        sys.stderr.write('Could not import %s. Either install it or otherwise add to PYTHONPATH\n%s\n' %(MY_PACKAGE_MODULE, str(e)))
+        sys.stderr.write(f'Could not import {MY_PACKAGE_MODULE}. Either install it or otherwise add to PYTHONPATH\n{str(e)}\n')
         return 1
 
     if not os.path.isdir(MY_TEST_DIRECTORY):
         if not os.path.exists(MY_TEST_DIRECTORY):
-            sys.stderr.write('Cannot find test directory: %s\n' %(MY_TEST_DIRECTORY,))
+            sys.stderr.write(f'Cannot find test directory: {MY_TEST_DIRECTORY}\n')
         else:
-            sys.stderr.write('Provided test directory, "%s" is not a directory.\n' %(MY_TEST_DIRECTORY,))
+            sys.stderr.write(f'Provided test directory, "{MY_TEST_DIRECTORY}" is not a directory.\n')
         return 3
 
     sys.stdout.write('Starting test..\n')

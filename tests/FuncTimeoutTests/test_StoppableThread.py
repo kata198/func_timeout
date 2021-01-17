@@ -38,9 +38,9 @@ class TestBasic(object):
         try:
             result = func_timeout(1.5, sleepFunction, args=(5, 13))
         except FunctionTimedOut as te:
-            raise AssertionError('Got unexpected timeout at 1.5 second timeout for 1.25 second function: %s' %(str(te),))
+            raise AssertionError(f'Got unexpected timeout at 1.5 second timeout for 1.25 second function: {str(te)}')
 
-        assert result == expectedResult , 'Got wrong return from func_timeout.\nGot:       %s\nExpected:  %s\n' %(repr(result), repr(expectedResult))
+        assert result == expectedResult , f'Got wrong return from func_timeout.\nGot:       {repr(result)}\nExpected:  {repr(expectedResult)}\n'
 
         gotException = False
         try:
@@ -53,9 +53,9 @@ class TestBasic(object):
         try:
             result = func_timeout(1.5, sleepFunction, args=(5,), kwargs={ 'b' : 13})
         except FunctionTimedOut as te:
-            raise AssertionError('Got unexpected timeout at 1.5 second timeout for 1.25 second function: %s' %(str(te), ))
+            raise AssertionError(f'Got unexpected timeout at 1.5 second timeout for 1.25 second function: {str(te)}')
         except Exception as e:
-            raise AssertionError('Got unknown exception mixing args and kwargs: < %s >  %s' %(e.__class__.__name__, str(e)))
+            raise AssertionError(f'Got unknown exception mixing args and kwargs: < {e.__class__.__name__} >  {str(e)}')
 
         assert result == expectedResult , 'Got wrong result when mixing args and kwargs'
 
@@ -76,7 +76,7 @@ class TestBasic(object):
         endTime = time.time()
 
         assert gotException , 'Expected to get exception'
-        assert compareTimes(endTime, startTime, .3, 3, .15, None) == 0 , 'Expected to wait .3 seconds. Was: %f - %f = %f' %(endTime, startTime, round(endTime - startTime, 3))
+        assert compareTimes(endTime, startTime, .3, 3, .15, None) == 0 , f'Expected to wait .3 seconds. Was: {endTime:f} - {startTime:f} = {round(endTime - startTime, 3):f}'
 
         gotException = False
         startTime = time.time()
@@ -143,8 +143,8 @@ class TestBasic(object):
 
         assert gotException , 'Expected to get exception'
 
-        assert 'timed out after ' in functionTimedOut.msg  , 'Expected message to be constructed. Got: %s' %(repr(functionTimedOut.msg), )
-        assert round(functionTimedOut.timedOutAfter, 1) == .3 , 'Expected timedOutAfter to equal timeout ( .3 ). Got: %s' %(str(round(functionTimedOut.timedOutAfter, 1)), )
+        assert 'timed out after ' in functionTimedOut.msg  , f'Expected message to be constructed. Got: {repr(functionTimedOut.msg)}'
+        assert round(functionTimedOut.timedOutAfter, 1) == .3 , f'Expected timedOutAfter to equal timeout ( .3 ). Got: {str(round(functionTimedOut.timedOutAfter, 1))}'
         assert functionTimedOut.timedOutFunction == sleepFunction , 'Expected timedOutFunction to equal sleepFunction'
         assert functionTimedOut.timedOutArgs == (5, 19) , 'Expected args to equal (5, 19)'
         assert functionTimedOut.timedOutKwargs == {} , 'Expected timedOutKwargs to equal {}'

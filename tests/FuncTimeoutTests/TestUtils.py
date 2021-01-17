@@ -1,4 +1,3 @@
-
 # vim: set ts=4 sw=4 expandtab :
 
 '''
@@ -93,7 +92,7 @@ def getSleepLambda(sleepTime):
 
     
 
-    return eval('''lambda a, b : int(bool(time.sleep(%f))) + a + b''' %(_sleepTime,))
+    return eval(f'''lambda a, b : int(bool(time.sleep({_sleepTime:f}))) + a + b''')
 
 
 def getSleepLambdaWithArgs(sleepTime, args):
@@ -145,7 +144,7 @@ def getSleepLambdaWithArgs(sleepTime, args):
 
 
 #    print ( 'Function is: %s' %('''lambda %s : int(bool(time.sleep(%f))) + %s''' %(argStr, sleepTime, sumStr, )  ) )
-    return eval('''lambda %s : int(bool(time.sleep(%f))) + %s''' % (argStr, sleepTime, sumStr, ) )
+    return eval(f'''lambda {argStr} : int(bool(time.sleep({sleepTime:f}))) + {sumStr}''' )
 
 
 def compareTimes(timeEnd, timeStart, cmpTime, roundTo=None, deltaFixed=.05, deltaPct=None):
