@@ -331,7 +331,7 @@ class TestDecorator(object):
         except FunctionTimedOut as fte2:
             gotException = True
         except Exception as e:
-            raise AssertionError('Got exception trying to retry with same timeout:  < %s > : %s' %(e.__name__, str(e)))
+            raise AssertionError(f'Got exception trying to retry with same timeout:  < {e.__name__} > : {str(e)}')
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated same 80% timeout on retry'
@@ -345,7 +345,7 @@ class TestDecorator(object):
         except FunctionTimedOut as fte2:
             gotException = True
         except Exception as e:
-            raise AssertionError('Got exception trying to retry with same timeout:  < %s > : %s' %(e.__name__, str(e)))
+            raise AssertionError(f'Got exception trying to retry with same timeout:  < {e.__name__} > : {str(e)}')
         endTime = time.time()
 
         assert not gotException , 'Expected to get exception with calculated 80% timeout on retry ( None ) [ No timeout ]'
@@ -361,7 +361,7 @@ class TestDecorator(object):
         except FunctionTimedOut as fte2:
             gotException = True
         except Exception as e:
-            raise AssertionError('Got exception trying to retry with same timeout:  < %s > : %s' %(e.__name__, str(e)))
+            raise AssertionError(f'Got exception trying to retry with same timeout:  < {e.__name__} > : {str(e)}')
         endTime = time.time()
 
         assert gotException , 'Expected to get exception with calculated 80% timeout overriden by 60% timeout on retry'
@@ -375,7 +375,7 @@ class TestDecorator(object):
         except FunctionTimedOut as fte2:
             gotException = True
         except Exception as e:
-            raise AssertionError('Got exception trying to retry with same timeout:  < %s > : %s' %(e.__name__, str(e)))
+            raise AssertionError(f'Got exception trying to retry with same timeout:  < {e.__name__} > : {str(e)}')
         endTime = time.time()
 
         assert not gotException , 'Expected to get exception with calculated 80% timeout overriden by 150% timeout on retry'

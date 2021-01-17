@@ -1,4 +1,3 @@
-
 # vim: set ts=4 sw=4 expandtab :
 
 '''
@@ -9,25 +8,23 @@
 '''
 
 import copy
-import inspect
-import threading
-import time
 import types
 import sys
 
 from .exceptions import FunctionTimedOut
 from .StoppableThread import StoppableThread
 
-try:
-    from .py3_raise import raise_exception
-except SyntaxError:
-    from .py2_raise import raise_exception
-except ImportError:
-    from .py2_raise import raise_exception
-
 from functools import wraps
 
 __all__ = ('func_timeout', 'func_set_timeout')
+
+
+# PEP 409 - Raise with the chained exception context disabled
+#  This, in effect, prevents the "funcwrap" wrapper ( chained
+#   in context to an exception raised here, due to scope )
+# Only available in python3.3+
+def raise_exception(exception):
+    raise exception[0] from None
 
 
 def func_timeout(timeout, func, args=(), kwargs=None):
@@ -175,7 +172,7 @@ def func_set_timeout(timeout, allowOverride=False):
             try:
                 timeout = float(timeout)
             except:
-                raise ValueError('timeout argument must be a float/int for number of seconds, or a function/lambda which gets passed the function arguments and returns a calculated timeout (as float or int). Passed type: < %s > is not of any of these, and cannot be converted to a float.' %( timeout.__class__.__name__, ))
+                raise ValueError(f'timeout argument must be a float/int for number of seconds, or a function/lambda which gets passed the function arguments and returns a calculated timeout (as float or int). Passed type: < {timeout.__class__.__name__} > is not of any of these, and cannot be converted to a float.')
 
 
     if not allowOverride and not isTimeoutAFunction:

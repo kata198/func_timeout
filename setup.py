@@ -26,11 +26,11 @@ if __name__ == '__main__':
         with open('README.rst', 'rt') as f:
             long_description = f.read()
     except Exception as e:
-        sys.stderr.write('Error reading from README.rst: %s\n' %(str(e),))
+        sys.stderr.write(f'Error reading from README.rst: {str(e)}\n')
         log_description = summary
 
     setup(name='func_timeout',
-            version='4.3.5',
+            version='4.4.0',
             packages=['func_timeout'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
@@ -44,12 +44,10 @@ if __name__ == '__main__':
             classifiers=['Development Status :: 5 - Production/Stable',
                          'Programming Language :: Python',
                          'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
-                         'Programming Language :: Python :: 2',
-                          'Programming Language :: Python :: 2.7',
-                          'Programming Language :: Python :: 3.4',
-                          'Programming Language :: Python :: 3.5',
                           'Programming Language :: Python :: 3.6',
                           'Programming Language :: Python :: 3.7',
+                          'Programming Language :: Python :: 3.8',
+                          'Programming Language :: Python :: 3.9',
                           'Topic :: Software Development :: Libraries :: Python Modules'
             ]
     )
