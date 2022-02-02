@@ -30,7 +30,7 @@ if __name__ == '__main__':
         log_description = summary
 
     setup(name='func_timeout',
-            version='4.3.5',
+            version='4.3.6',
             packages=['func_timeout'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
@@ -50,6 +50,9 @@ if __name__ == '__main__':
                           'Programming Language :: Python :: 3.5',
                           'Programming Language :: Python :: 3.6',
                           'Programming Language :: Python :: 3.7',
+                          'Programming Language :: Python :: 3.8',
+                          'Programming Language :: Python :: 3.9',
+                          'Programming Language :: Python :: 3.10',
                           'Topic :: Software Development :: Libraries :: Python Modules'
             ]
     )
