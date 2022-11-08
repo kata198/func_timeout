@@ -8,6 +8,7 @@
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE
 '''
 
+
 import copy
 import inspect
 import threading
@@ -20,11 +21,8 @@ from .StoppableThread import StoppableThread
 
 try:
     from .py3_raise import raise_exception
-except SyntaxError:
+except (SyntaxError, ImportError):
     from .py2_raise import raise_exception
-except ImportError:
-    from .py2_raise import raise_exception
-
 from functools import wraps
 
 __all__ = ('func_timeout', 'func_set_timeout')
@@ -65,19 +63,19 @@ def func_timeout(timeout, func, args=(), kwargs=None):
 
     def funcwrap(args2, kwargs2):
         try:
-            ret.append( func(*args2, **kwargs2) )
+            ret.append(func(*args2, **kwargs2))
         except FunctionTimedOut:
             # Don't print traceback to stderr if we time out
             pass
         except Exception as e:
             exc_info = sys.exc_info()
-            if isStopped is False:
+            if not isStopped:
                 # Assemble the alternate traceback, excluding this function
                 #  from the trace (by going to next frame)
                 # Pytohn3 reads native from __traceback__,
                 # python2 has a different form for "raise"
                 e.__traceback__ = exc_info[2].tb_next
-                exception.append( e )
+                exception.append(e)
 
     thread = StoppableThread(target=funcwrap, args=(args, kwargs))
     thread.daemon = True
@@ -93,7 +91,8 @@ def func_timeout(timeout, func, args=(), kwargs=None):
             def __init__(self):
                 return FunctionTimedOut.__init__(self, '', timeout, func, args, kwargs)
 
-        FunctionTimedOutTemp = type('FunctionTimedOut' + str( hash( "%d_%d_%d_%d" %(id(timeout), id(func), id(args), id(kwargs))) ), FunctionTimedOutTempType.__bases__, dict(FunctionTimedOutTempType.__dict__))
+        FunctionTimedOutTemp = type('FunctionTimedOut' + str(hash("%d_%d_%d_%d" % (id(timeout), id(func), id(
+            args), id(kwargs)))), FunctionTimedOutTempType.__bases__, dict(FunctionTimedOutTempType.__dict__))
 
         stopException = FunctionTimedOutTemp
         thread._stopThread(stopException)
@@ -168,21 +167,21 @@ def func_set_timeout(timeout, allowOverride=False):
     #  Helps closure issue on some versions of python
     defaultTimeout = copy.copy(timeout)
 
-    isTimeoutAFunction = bool( issubclass(timeout.__class__, (types.FunctionType, types.MethodType, types.LambdaType, types.BuiltinFunctionType, types.BuiltinMethodType) ) )
+    isTimeoutAFunction = issubclass(timeout.__class__, (types.FunctionType, types.MethodType,
+                                    types.LambdaType, types.BuiltinFunctionType, types.BuiltinMethodType))
 
-    if not isTimeoutAFunction:
-        if not issubclass(timeout.__class__, (float, int)):
-            try:
-                timeout = float(timeout)
-            except:
-                raise ValueError('timeout argument must be a float/int for number of seconds, or a function/lambda which gets passed the function arguments and returns a calculated timeout (as float or int). Passed type: < %s > is not of any of these, and cannot be converted to a float.' %( timeout.__class__.__name__, ))
-
+    if not isTimeoutAFunction and not issubclass(timeout.__class__, (float, int)):
+        try:
+            timeout = float(timeout)
+        except:
+            raise ValueError(
+                f'timeout argument must be a float/int for number of seconds, or a function/lambda which gets passed the function arguments and returns a calculated timeout (as float or int). Passed type: < {timeout.__class__.__name__} > is not of any of these, and cannot be converted to a float.')
 
     if not allowOverride and not isTimeoutAFunction:
         # Only defaultTimeout provided. Simple function wrapper
         def _function_decorator(func):
 
-            return wraps(func)(lambda *args, **kwargs : func_timeout(defaultTimeout, func, args=args, kwargs=kwargs))
+            return wraps(func)(lambda *args, **kwargs: func_timeout(defaultTimeout, func, args=args, kwargs=kwargs))
 
 #            def _function_wrapper(*args, **kwargs):
 #                return func_timeout(defaultTimeout, func, args=args, kwargs=kwargs)
@@ -202,7 +201,6 @@ def func_set_timeout(timeout, allowOverride=False):
 
             return wraps(func)(_function_wrapper)
         return _function_decorator
-
 
     # At this point, timeout IS known to be a function.
     timeoutFunction = timeout
@@ -230,6 +228,7 @@ def func_set_timeout(timeout, allowOverride=False):
             return func_timeout(useTimeout, func, args=args, kwargs=kwargs)
 
         return wraps(func)(_function_wrapper)
+
     return _function_decorator
 
 
