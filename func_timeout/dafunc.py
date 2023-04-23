@@ -68,6 +68,9 @@ def func_timeout(timeout, func, args=(), kwargs=None):
             ret.append( func(*args2, **kwargs2) )
         except FunctionTimedOut:
             # Don't print traceback to stderr if we time out
+            currentThread = threading.current_thread()
+            if getattr(currentThread, 'isNestedStoppableThread', False) is True:
+                raise
             pass
         except Exception as e:
             exc_info = sys.exc_info()

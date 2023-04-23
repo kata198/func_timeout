@@ -32,6 +32,7 @@ class StoppableThread(threading.Thread):
 
         The exception is raised over and over, with a specifed delay (default 2.0 seconds)
     '''
+    isNestedStoppableThread = None
 
 
     def _stopThread(self, exception, raiseEvery=2.0):
@@ -40,6 +41,12 @@ class StoppableThread(threading.Thread):
         '''
         if self.is_alive() is False:
             return True
+
+        currentThread = threading.current_thread()
+        if issubclass(currentThread.__class__, StoppableThread):
+            currentThread.isNestedStoppableThread = True
+        else:
+            currentThread.isNestedStoppableThread = False
 
         self._stderr = open(os.devnull, 'w')
 
