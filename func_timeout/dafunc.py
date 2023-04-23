@@ -2,7 +2,7 @@
 # vim: set ts=4 sw=4 expandtab :
 
 '''
-    Copyright (c) 2016, 2017 Tim Savannah All Rights Reserved.
+    Copyright (c) 2016, 2017, 2023 Tim Savannah All Rights Reserved.
 
     Licensed under the Lesser GNU Public License Version 3, LGPLv3. You should have recieved a copy of this with the source distribution as
     LICENSE, otherwise it is available at https://github.com/kata198/func_timeout/LICENSE

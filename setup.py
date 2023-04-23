@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''
-    Copyright (c) 2016, 2017 Tim Savannah All Rights Reserved.
+    Copyright (c) 2016, 2017, 2023 Tim Savannah All Rights Reserved.
     This software is licensed under the terms of the Lesser GNU General Public License Version 2.1 (LGPLv2.1)
 
     You should have received a copy of this with the source distribution as LICENSE,
@@ -30,7 +30,7 @@ if __name__ == '__main__':
         log_description = summary
 
     setup(name='func_timeout',
-            version='4.3.5',
+            version='4.4.0',
             packages=['func_timeout'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
@@ -50,6 +50,8 @@ if __name__ == '__main__':
                           'Programming Language :: Python :: 3.5',
                           'Programming Language :: Python :: 3.6',
                           'Programming Language :: Python :: 3.7',
+                          'Programming Language :: Python :: 3.8',
+                          'Programming Language :: Python :: 3.9',
                           'Topic :: Software Development :: Libraries :: Python Modules'
             ]
     )
